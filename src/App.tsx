@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import * as esbuild from 'esbuild-wasm';
+import { unpkgPathPlugin } from './plugins/unpkg-path-plugin';
 
 function App() {
   const [userCode, setUserCode] = useState<string>('');
@@ -22,12 +23,16 @@ function App() {
       return;
     }
 
-    const result = await esbuildRef.current.transform(userCode, {
-      loader: 'jsx',
-      target: 'es2015'
+    const result = await esbuildRef.current.build({
+      entryPoints: ['index.js'],
+      bundle: true,
+      write: false,
+      plugins: [unpkgPathPlugin()]
     });
 
-    setCompileCode(result?.code);
+    console.log(result);
+
+    setCompileCode(result.outputFiles[0].text);
   };
 
   return (
