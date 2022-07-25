@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as esbuild from 'esbuild-wasm';
+import localforage from 'localforage';
 import { UNPACKAGE_URL } from '../utils/const';
 
 export const unpkgPathPlugin = () => {
@@ -17,7 +18,8 @@ export const unpkgPathPlugin = () => {
         if (args.path.includes('./') || args.path.includes('../')) {
           return {
             namespace: 'a',
-            path: new URL(args.path, `https://unpkg.com${args.resolveDir}/`).href
+            path: new URL(args.path, `https://unpkg.com${args.resolveDir}/`)
+              .href
           };
         }
 
@@ -32,19 +34,32 @@ export const unpkgPathPlugin = () => {
           return {
             loader: 'jsx',
             contents: `
-              const message = require('react');
+              const message = require('nested-test-pkg');
               console.log(message);
             `
           };
         }
 
+        const cacheData = await localforage.getItem<esbuild.OnLoadResult>(
+          args.path
+        );
+        console.log(cacheData);
+
+        if (cacheData) {
+          return cacheData;
+        }
+
         const { data, request } = await axios.get(args.path);
 
-        return {
+        const result: esbuild.OnLoadResult = {
           loader: 'jsx',
           contents: data,
           resolveDir: new URL('./', request.responseURL).pathname
         };
+
+        await localforage.setItem(args.path, result);
+
+        return result;
       });
     }
   };
