@@ -34,8 +34,6 @@ function App() {
       }
     });
 
-    console.log(result);
-
     setCompileCode(result.outputFiles[0].text);
   };
 
