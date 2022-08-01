@@ -1,9 +1,7 @@
-import axios from 'axios';
 import * as esbuild from 'esbuild-wasm';
-import localforage from 'localforage';
 import { UNPACKAGE_URL } from '../utils/const';
 
-export const unpkgPathPlugin = (userCode: string) => {
+export const unpkgPathPlugin = () => {
   return {
     name: 'unpkg-path-plugin',
     setup(build: esbuild.PluginBuild) {
@@ -24,36 +22,6 @@ export const unpkgPathPlugin = (userCode: string) => {
       // Handle main file of a module
       build.onResolve({ filter: /.*/ }, async (args: any) => {
         return { path: `${UNPACKAGE_URL}${args.path}`, namespace: 'a' };
-      });
-
-      // build.onLoad is trigger whenever a resolve is triggered -  I mean that the file is loaded
-      build.onLoad({ filter: /.*/ }, async (args: any) => {
-        if (args.path === 'index.js') {
-          return {
-            loader: 'jsx',
-            contents: userCode
-          };
-        }
-
-        const cacheData = await localforage.getItem<esbuild.OnLoadResult>(
-          args.path
-        );
-
-        if (cacheData) {
-          return cacheData;
-        }
-
-        const { data, request } = await axios.get(args.path);
-
-        const result: esbuild.OnLoadResult = {
-          loader: 'jsx',
-          contents: data,
-          resolveDir: new URL('./', request.responseURL).pathname
-        };
-
-        await localforage.setItem(args.path, result);
-
-        return result;
       });
     }
   };
