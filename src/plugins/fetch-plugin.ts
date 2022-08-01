@@ -7,14 +7,17 @@ export const fetchPlugin = (userCode: string) => {
     name: 'fetch-plugin',
     setup(build: esbuild.PluginBuild) {
       // build.onLoad is trigger whenever a resolve is triggered -  I mean that the file is loaded
-      build.onLoad({ filter: /.*/ }, async (args: any) => {
-        if (args.path === 'index.js') {
-          return {
-            loader: 'jsx',
-            contents: userCode
-          };
-        }
+      // Handle root entry of index.js file only
+      build.onLoad({ filter: /(^index\.js$)/ }, () => {
+        return {
+          loader: 'jsx',
+          contents: userCode
+        };
+      });
 
+      // Handle import module
+      build.onLoad({ filter: /.*/ }, async (args: any) => {
+        // Check whether data is cached
         const cacheData = await localforage.getItem<esbuild.OnLoadResult>(
           args.path
         );
