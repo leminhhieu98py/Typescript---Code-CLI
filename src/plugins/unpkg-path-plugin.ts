@@ -8,19 +8,21 @@ export const unpkgPathPlugin = (userCode: string) => {
     name: 'unpkg-path-plugin',
     setup(build: esbuild.PluginBuild) {
       // build.onResolve is to find out where is the file in our local system
+      // Handle root entry of index.js file only
+      build.onResolve({ filter: /(^index\.js$)/ }, () => {
+        return { path: 'index.js', namespace: 'a' };
+      });
+
+      // Handle relative paths in a module
+      build.onResolve({ filter: /^\.+\// }, (args: any) => {
+        return {
+          namespace: 'a',
+          path: new URL(args.path, `https://unpkg.com${args.resolveDir}/`).href
+        };
+      });
+
+      // Handle main file of a module
       build.onResolve({ filter: /.*/ }, async (args: any) => {
-        if (args.path === 'index.js') {
-          return { path: args.path, namespace: 'a' };
-        }
-
-        if (args.path.includes('./') || args.path.includes('../')) {
-          return {
-            namespace: 'a',
-            path: new URL(args.path, `https://unpkg.com${args.resolveDir}/`)
-              .href
-          };
-        }
-
         return { path: `${UNPACKAGE_URL}${args.path}`, namespace: 'a' };
       });
 
