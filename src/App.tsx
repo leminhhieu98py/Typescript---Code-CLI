@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import * as esbuild from 'esbuild-wasm';
 import { unpkgPathPlugin } from './plugins/unpkg-path-plugin';
 import { fetchPlugin } from './plugins/fetch-plugin';
+import { ESBUILD_WASM_URL } from './common/const';
 
 function App() {
   const [userCode, setUserCode] = useState<string>('');
@@ -15,7 +16,7 @@ function App() {
   const startEsbuild = async () => {
     esbuildRef.current = await esbuild.startService({
       worker: true,
-      wasmURL: '/esbuild.wasm'
+      wasmURL: ESBUILD_WASM_URL
     });
   };
 
