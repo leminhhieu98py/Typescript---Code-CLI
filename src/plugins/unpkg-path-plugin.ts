@@ -9,8 +9,6 @@ export const unpkgPathPlugin = () => {
     setup(build: esbuild.PluginBuild) {
       // build.onResolve is to find out where is the file in our local system
       build.onResolve({ filter: /.*/ }, async (args: any) => {
-        console.log('onResolve', args);
-
         if (args.path === 'index.js') {
           return { path: args.path, namespace: 'a' };
         }
@@ -28,8 +26,6 @@ export const unpkgPathPlugin = () => {
 
       // build.onLoad is trigger whenever a resolve is triggered -  I mean that the file is loaded
       build.onLoad({ filter: /.*/ }, async (args: any) => {
-        console.log('onLoad', args);
-
         if (args.path === 'index.js') {
           return {
             loader: 'jsx',
@@ -43,7 +39,6 @@ export const unpkgPathPlugin = () => {
         const cacheData = await localforage.getItem<esbuild.OnLoadResult>(
           args.path
         );
-        console.log(cacheData);
 
         if (cacheData) {
           return cacheData;
