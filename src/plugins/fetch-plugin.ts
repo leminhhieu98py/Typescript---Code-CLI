@@ -2,12 +2,6 @@ import * as esbuild from 'esbuild-wasm';
 import localforage from 'localforage';
 import axios from 'axios';
 
-const useCacheData = async (path: string) => {
-  const cacheData = await localforage.getItem<esbuild.OnLoadResult>(path);
-  const isCache = !!cacheData;
-  return [isCache, cacheData];
-};
-
 export const fetchPlugin = (userCode: string) => {
   return {
     name: 'fetch-plugin',
