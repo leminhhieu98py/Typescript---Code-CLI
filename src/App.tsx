@@ -49,6 +49,7 @@ function App() {
         <button onClick={handleClick}>Submit</button>
       </div>
       <pre>{compileCode}</pre>
+      <iframe src="./iframe.html" title="myIframe">hello</iframe>
     </div>
   );
 }
