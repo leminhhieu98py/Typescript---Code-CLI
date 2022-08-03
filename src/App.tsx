@@ -46,7 +46,13 @@ function App() {
     <head>
       <script>
         window.addEventListener('message', (event) => {
-          event?.data && eval(event.data)
+          try {
+            eval(event.data);
+          } catch (err) {
+            const root = document.querySelector('#root');
+            root.innerHTML = '<div style="color: red;"><h4>Runtime error:</h4>' + err + '</div>';
+            console.error(err);
+          }
         }, false)
       </script>
     </head>
