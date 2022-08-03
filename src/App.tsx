@@ -6,8 +6,8 @@ import { ESBUILD_WASM_URL } from './common/const';
 
 function App() {
   const [userCode, setUserCode] = useState<string>('');
-  const [compileCode, setCompileCode] = useState<string>('');
   const esbuildRef = useRef<any>(null);
+  const iframeRef = useRef<any>(null);
 
   useEffect(() => {
     startEsbuild();
@@ -36,12 +36,24 @@ function App() {
       }
     });
 
-    setCompileCode(`
-    <script>
-      ${result.outputFiles[0].text}
-    </script>
-    `);
+    iframeRef.current.contentWindow.postMessage(
+      result.outputFiles[0].text,
+      '*'
+    );
   };
+
+  const iframeSrcDoc = `
+    <head>
+      <script>
+        window.addEventListener('message', (event) => {
+          event?.data && eval(event.data)
+        }, false)
+      </script>
+    </head>
+    <body>
+      <div id="root"></div>
+    </body>
+  `;
 
   return (
     <div>
@@ -52,7 +64,12 @@ function App() {
       <div>
         <button onClick={handleClick}>Submit</button>
       </div>
-      <iframe sandbox="allow-scripts" srcDoc={compileCode} title="myIframe" />
+      <iframe
+        sandbox="allow-scripts"
+        srcDoc={iframeSrcDoc}
+        ref={iframeRef}
+        title="myIframe"
+      />
     </div>
   );
 }
