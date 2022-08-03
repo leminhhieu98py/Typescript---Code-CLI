@@ -8,11 +8,6 @@ function App() {
   const [userCode, setUserCode] = useState<string>('');
   const [compileCode, setCompileCode] = useState<string>('');
   const esbuildRef = useRef<any>(null);
-  const html = `
-  <script>
-    ${compileCode}
-  </script>
-  `;
 
   useEffect(() => {
     startEsbuild();
@@ -41,7 +36,11 @@ function App() {
       }
     });
 
-    setCompileCode(result.outputFiles[0].text);
+    setCompileCode(`
+    <script>
+      ${result.outputFiles[0].text}
+    </script>
+    `);
   };
 
   return (
@@ -53,7 +52,7 @@ function App() {
       <div>
         <button onClick={handleClick}>Submit</button>
       </div>
-      <iframe sandbox="allow-scripts" srcDoc={html} title="myIframe" />
+      <iframe sandbox="allow-scripts" srcDoc={compileCode} title="myIframe" />
     </div>
   );
 }
