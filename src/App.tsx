@@ -8,6 +8,11 @@ function App() {
   const [userCode, setUserCode] = useState<string>('');
   const [compileCode, setCompileCode] = useState<string>('');
   const esbuildRef = useRef<any>(null);
+  const html = `
+  <script>
+    ${compileCode}
+  </script>
+  `;
 
   useEffect(() => {
     startEsbuild();
@@ -48,8 +53,7 @@ function App() {
       <div>
         <button onClick={handleClick}>Submit</button>
       </div>
-      <pre>{compileCode}</pre>
-      <iframe sandbox='allow-same-origin' src="./iframe.html" title="myIframe" />
+      <iframe sandbox="allow-scripts" srcDoc={html} title="myIframe" />
     </div>
   );
 }
