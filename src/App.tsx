@@ -49,7 +49,7 @@ function App() {
           try {
             eval(event.data);
           } catch (err) {
-            const root = document.querySelector('#root');
+            const root = document.getElementById('root');
             root.innerHTML = '<div style="color: red;"><h4>Runtime error:</h4>' + err + '</div>';
             console.error(err);
           }
