@@ -80,7 +80,7 @@ function App() {
         sandbox="allow-scripts"
         srcDoc={iframeSrcDoc}
         ref={iframeRef}
-        title="myIframe"
+        title="code preview"
       />
     </div>
   );
