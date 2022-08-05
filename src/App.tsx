@@ -21,8 +21,7 @@ function App() {
   };
 
   const resetIframeContent = () => {
-    iframeRef.current.srcDoc = iframeSrcDoc;
-    console.log('iframeRef.current.srcDoc', iframeRef.current.srcDoc);
+    iframeRef.current.srcdoc = iframeSrcDoc;
   };
 
   const handleClick = async () => {
@@ -50,11 +49,14 @@ function App() {
   };
 
   const iframeSrcDoc = `
-    <head>
+    <head></head>
+    <body>
+      <div id="root"></div>
       <script>
         window.addEventListener('message', (event) => {
           try {
             eval(event.data);
+            // console.log('iframeRef.current.', document)
           } catch (err) {
             const root = document.getElementById('root');
             root.innerHTML = '<div style="color: red;"><h4>Runtime error:</h4>' + err + '</div>';
@@ -62,9 +64,6 @@ function App() {
           }
         }, false)
       </script>
-    </head>
-    <body>
-      <div id="root"></div>
     </body>
   `;
 
