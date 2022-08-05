@@ -20,10 +20,17 @@ function App() {
     });
   };
 
+  const resetIframeContent = () => {
+    iframeRef.current.srcDoc = iframeSrcDoc;
+    console.log('iframeRef.current.srcDoc', iframeRef.current.srcDoc);
+  };
+
   const handleClick = async () => {
     if (!esbuildRef.current) {
       return;
     }
+
+    resetIframeContent();
 
     const result = await esbuildRef.current.build({
       entryPoints: ['index.js'],
