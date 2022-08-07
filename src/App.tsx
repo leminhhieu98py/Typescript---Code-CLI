@@ -72,6 +72,7 @@ function App() {
       <textarea
         onChange={(e) => setUserCode(e.target.value)}
         value={userCode}
+        placeholder="Enter some code to execute..."
       />
       <div>
         <button onClick={handleClick}>Submit</button>
