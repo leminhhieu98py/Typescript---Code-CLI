@@ -56,7 +56,6 @@ function App() {
         window.addEventListener('message', (event) => {
           try {
             eval(event.data);
-            // console.log('iframeRef.current.', document)
           } catch (err) {
             const root = document.getElementById('root');
             root.innerHTML = '<div style="color: red;"><h4>Runtime error:</h4>' + err + '</div>';
