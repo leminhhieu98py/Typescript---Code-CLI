@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import * as esbuild from 'esbuild-wasm';
 import { unpkgPathPlugin } from './plugins/unpkg-path-plugin';
 import { fetchPlugin } from './plugins/fetch-plugin';
@@ -12,40 +12,11 @@ function App() {
   useEffect(() => {
     startEsbuild();
   }, []);
-
   const startEsbuild = async () => {
     esbuildRef.current = await esbuild.startService({
       worker: true,
       wasmURL: ESBUILD_WASM_URL
     });
-  };
-
-  const resetIframeContent = () => {
-    iframeRef.current.srcdoc = iframeSrcDoc;
-  };
-
-  const handleClick = async () => {
-    if (!esbuildRef.current) {
-      return;
-    }
-
-    resetIframeContent();
-
-    const result = await esbuildRef.current.build({
-      entryPoints: ['index.js'],
-      bundle: true,
-      write: false,
-      plugins: [unpkgPathPlugin(), fetchPlugin(userCode)],
-      define: {
-        'process.env.NODE_ENV': '"production"',
-        global: 'window'
-      }
-    });
-
-    iframeRef.current.contentWindow.postMessage(
-      result.outputFiles[0].text,
-      '*'
-    );
   };
 
   const iframeSrcDoc = `
@@ -66,6 +37,43 @@ function App() {
     </body>
   `;
 
+  const resetIframeContent = useCallback(() => {
+    iframeRef.current.srcdoc = iframeSrcDoc;
+  }, [iframeSrcDoc]);
+
+  const handleClick = useCallback(
+    async (userCode: string) => {
+      if (!esbuildRef.current) {
+        return;
+      }
+
+      resetIframeContent();
+
+      const result = await esbuildRef.current.build({
+        entryPoints: ['index.js'],
+        bundle: true,
+        write: false,
+        plugins: [unpkgPathPlugin(), fetchPlugin(userCode)],
+        define: {
+          'process.env.NODE_ENV': '"production"',
+          global: 'window'
+        }
+      });
+
+      iframeRef.current.contentWindow.postMessage(
+        result.outputFiles[0].text,
+        '*'
+      );
+    },
+    [resetIframeContent]
+  );
+
+  useEffect(() => {
+    const bundleCode = setTimeout(() => handleClick(userCode), 1000);
+
+    return () => clearTimeout(bundleCode);
+  }, [userCode, handleClick]);
+
   return (
     <div>
       <textarea
@@ -73,9 +81,6 @@ function App() {
         value={userCode}
         placeholder="Enter some code to execute..."
       />
-      <div>
-        <button onClick={handleClick}>Submit</button>
-      </div>
       <iframe
         sandbox="allow-scripts"
         srcDoc={iframeSrcDoc}
