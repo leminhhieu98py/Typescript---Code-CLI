@@ -77,7 +77,21 @@ function App() {
 
   return (
     <div>
-      <Editor theme='dark' height={500} language='javascript' />
+      <Editor
+        theme="dark"
+        height={500}
+        language="javascript"
+        options={{
+          wordWrap: 'on',
+          minimap: { enabled: false },
+          showUnused: false,
+          folding: false,
+          lineNumbersMinChars: 3,
+          fontSize: 16,
+          scrollBeyondLastLine: false,
+          automaticLayout: true
+        }}
+      />
       <textarea
         onChange={(e) => setUserCode(e.target.value)}
         value={userCode}
