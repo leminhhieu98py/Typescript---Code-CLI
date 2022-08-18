@@ -3,7 +3,7 @@ import * as esbuild from 'esbuild-wasm';
 import { unpkgPathPlugin } from './plugins/unpkg-path-plugin';
 import { fetchPlugin } from './plugins/fetch-plugin';
 import { ESBUILD_WASM_URL } from './common/const';
-import Editor from '@monaco-editor/react';
+import MoncacoEditor from './components/common/MonacoEditor';
 
 function App() {
   const [userCode, setUserCode] = useState<string>('');
@@ -77,21 +77,7 @@ function App() {
 
   return (
     <div>
-      <Editor
-        theme="dark"
-        height={500}
-        language="javascript"
-        options={{
-          wordWrap: 'on',
-          minimap: { enabled: false },
-          showUnused: false,
-          folding: false,
-          lineNumbersMinChars: 3,
-          fontSize: 16,
-          scrollBeyondLastLine: false,
-          automaticLayout: true
-        }}
-      />
+      <MoncacoEditor initialValue="Hello" />
       <textarea
         onChange={(e) => setUserCode(e.target.value)}
         value={userCode}
