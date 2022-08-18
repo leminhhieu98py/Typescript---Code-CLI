@@ -4,6 +4,7 @@ import { unpkgPathPlugin } from './plugins/unpkg-path-plugin';
 import { fetchPlugin } from './plugins/fetch-plugin';
 import { ESBUILD_WASM_URL } from './common/const';
 import MoncacoEditor from './components/common/MonacoEditor';
+import CompileCodeScreen from './components/CompileCodeScreen';
 
 const initialEditorValue = `import React from 'react';
   import ReactDOM from 'react-dom';
@@ -85,12 +86,7 @@ function App() {
   return (
     <div>
       <MoncacoEditor value={userCode} onChange={setUserCode} />
-      <iframe
-        sandbox="allow-scripts"
-        srcDoc={iframeSrcDoc}
-        ref={iframeRef}
-        title="code preview"
-      />
+      <CompileCodeScreen ref={iframeRef} srcDoc={iframeSrcDoc} />
     </div>
   );
 }
