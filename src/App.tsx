@@ -5,8 +5,33 @@ import { fetchPlugin } from './plugins/fetch-plugin';
 import { ESBUILD_WASM_URL } from './common/const';
 import MoncacoEditor from './components/common/MonacoEditor';
 
+const initialEditorValue = `import React from 'react';
+  import ReactDOM from 'react-dom';
+
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(<h1>Hello World</h1>)
+`;
+
+const iframeSrcDoc = `
+  <head></head>
+  <body>
+    <div id="root"></div>
+    <script>
+      window.addEventListener('message', (event) => {
+        try {
+          eval(event.data);
+        } catch (err) {
+          const root = document.getElementById('root');
+          root.innerHTML = '<div style="color: red;"><h4>Runtime error:</h4>' + err + '</div>';
+          console.error(err);
+        }
+      }, false)
+    </script>
+  </body>
+`;
+
 function App() {
-  const [userCode, setUserCode] = useState<string>('');
+  const [userCode, setUserCode] = useState<string>(initialEditorValue);
   const esbuildRef = useRef<any>(null);
   const iframeRef = useRef<any>(null);
 
@@ -20,27 +45,9 @@ function App() {
     });
   };
 
-  const iframeSrcDoc = `
-    <head></head>
-    <body>
-      <div id="root"></div>
-      <script>
-        window.addEventListener('message', (event) => {
-          try {
-            eval(event.data);
-          } catch (err) {
-            const root = document.getElementById('root');
-            root.innerHTML = '<div style="color: red;"><h4>Runtime error:</h4>' + err + '</div>';
-            console.error(err);
-          }
-        }, false)
-      </script>
-    </body>
-  `;
-
   const resetIframeContent = useCallback(() => {
     iframeRef.current.srcdoc = iframeSrcDoc;
-  }, [iframeSrcDoc]);
+  }, []);
 
   const handleClick = useCallback(
     async (userCode: string) => {
@@ -77,7 +84,7 @@ function App() {
 
   return (
     <div>
-      <MoncacoEditor initialValue="Hello" />
+      <MoncacoEditor value={userCode} onChange={setUserCode} />
       <textarea
         onChange={(e) => setUserCode(e.target.value)}
         value={userCode}

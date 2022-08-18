@@ -1,14 +1,22 @@
 import React from 'react';
-import Editor from '@monaco-editor/react';
+import Editor, { EditorDidMount } from '@monaco-editor/react';
 
 interface MoncacoEditorProps {
-  initialValue: string;
+  value: string;
+  onChange: (value: string) => void;
 }
 
-const MoncacoEditor: React.FC<MoncacoEditorProps> = ({ initialValue }) => {
+const MoncacoEditor: React.FC<MoncacoEditorProps> = ({ value, onChange }) => {
+  const onEditorDidMount: EditorDidMount = (getEditorValue, editor) => {
+    editor.onDidChangeModelContent(() => {
+      onChange(getEditorValue());
+    });
+  };
+
   return (
     <Editor
-      value={initialValue}
+      editorDidMount={onEditorDidMount}
+      value={value}
       theme="dark"
       height={500}
       language="javascript"
