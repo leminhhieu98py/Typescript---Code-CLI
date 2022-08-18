@@ -85,11 +85,6 @@ function App() {
   return (
     <div>
       <MoncacoEditor value={userCode} onChange={setUserCode} />
-      <textarea
-        onChange={(e) => setUserCode(e.target.value)}
-        value={userCode}
-        placeholder="Enter some code to execute..."
-      />
       <iframe
         sandbox="allow-scripts"
         srcDoc={iframeSrcDoc}
