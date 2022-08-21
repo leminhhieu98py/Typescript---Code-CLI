@@ -2,16 +2,17 @@
   position: relative;
   height: 100%;
 
-  & .button-format {
+  & .button-floating {
     position: absolute;
     top: 5px;
     right: 5px;
     z-index: 1;
     opacity: 0;
-    transform: opacity 0.3s;
+    transition: opacity 0.3s;
+    border-radius: 5px;
   }
 
-  &:hover .button-format {
+  &:hover .button-floating {
     opacity: 1;
   }
 }

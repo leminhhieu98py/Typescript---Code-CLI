@@ -36,7 +36,7 @@ const MoncacoEditor: React.FC<MoncacoEditorProps> = ({ value, onChange }) => {
   return (
     <div className={styles['editor-container']}>
       <button
-        className="button button-format is-primary is-small"
+        className={`${styles['button-floating']} button button-format is-primary is-small`}
         onClick={handleFormatCode}
       >
         Format
