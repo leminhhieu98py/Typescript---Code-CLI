@@ -28,12 +28,17 @@ const MoncacoEditor: React.FC<MoncacoEditorProps> = ({ value, onChange }) => {
   const handleFormatCode = () => {
     const unformatCode = editorRef.current.getModel().getValue();
     const formatCode = prettier.format(unformatCode, PRETTIER_FORMAT_OPTIONS);
-    onChange(formatCode)
+    onChange(formatCode);
   };
 
   return (
     <>
-      <button onClick={handleFormatCode}>Format</button>
+      <button
+        className="button button-format is-primary is-small"
+        onClick={handleFormatCode}
+      >
+        Format
+      </button>
       <Editor
         editorDidMount={onEditorDidMount}
         value={value}
