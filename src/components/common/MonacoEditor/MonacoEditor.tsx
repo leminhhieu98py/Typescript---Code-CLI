@@ -29,7 +29,9 @@ const MoncacoEditor: React.FC<MoncacoEditorProps> = ({ value, onChange }) => {
 
   const handleFormatCode = () => {
     const unformatCode = editorRef.current.getModel().getValue();
-    const formatCode = prettier.format(unformatCode, PRETTIER_FORMAT_OPTIONS);
+    const formatCode = prettier
+      .format(unformatCode, PRETTIER_FORMAT_OPTIONS)
+      .replace(/\n$/, '');
     onChange(formatCode);
   };
 
