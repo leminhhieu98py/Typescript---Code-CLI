@@ -2,6 +2,8 @@ import React, { useRef } from 'react';
 import Editor, { EditorDidMount } from '@monaco-editor/react';
 import prettier from 'prettier';
 import parser from 'prettier/parser-babel';
+import styles from './MonacoEditor.module.scss';
+
 interface MoncacoEditorProps {
   value: string;
   onChange: (value: string) => void;
@@ -32,7 +34,7 @@ const MoncacoEditor: React.FC<MoncacoEditorProps> = ({ value, onChange }) => {
   };
 
   return (
-    <>
+    <div className={styles['editor-container']}>
       <button
         className="button button-format is-primary is-small"
         onClick={handleFormatCode}
@@ -56,7 +58,7 @@ const MoncacoEditor: React.FC<MoncacoEditorProps> = ({ value, onChange }) => {
           automaticLayout: true
         }}
       />
-    </>
+    </div>
   );
 };
 

@@ -4,7 +4,7 @@ import * as esbuild from 'esbuild-wasm';
 import { unpkgPathPlugin } from './plugins/unpkg-path-plugin';
 import { fetchPlugin } from './plugins/fetch-plugin';
 import { ESBUILD_WASM_URL } from './common/const';
-import MoncacoEditor from './components/common/MonacoEditor';
+import MoncacoEditor from './components/common/MonacoEditor/MonacoEditor';
 import CompileCodeScreen from './components/CompileCodeScreen';
 
 const initialEditorValue = `import React from 'react';
