@@ -3,7 +3,8 @@ import Editor, { EditorDidMount } from '@monaco-editor/react';
 import prettier from 'prettier';
 import parser from 'prettier/parser-babel';
 import styles from './MonacoEditor.module.scss';
-
+import codeShift from 'jscodeshift';
+import Highlighter from 'monaco-jsx-highlighter';
 interface MoncacoEditorProps {
   value: string;
   onChange: (value: string) => void;
@@ -25,6 +26,15 @@ const MoncacoEditor: React.FC<MoncacoEditorProps> = ({ value, onChange }) => {
     editor.onDidChangeModelContent(() => {
       onChange(getEditorValue());
     });
+
+    const highlightCode = new Highlighter(
+      // @ts-ignore
+      window.monaco,
+      codeShift,
+      editor
+    );
+
+    highlightCode.highLightOnDidChangeModelContent();
   };
 
   const handleFormatCode = () => {
