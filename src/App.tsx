@@ -1,6 +1,6 @@
 import 'bulmaswatch/superhero/bulmaswatch.min.css';
 import React, { useEffect, useState, useRef } from 'react';
-import MoncacoEditor from './components/common/MonacoEditor/MonacoEditor';
+import MonacoEditor from './components/common/MonacoEditor/MonacoEditor';
 import CompileCodeScreen from './components/CompileCodeScreen';
 import { startEsbuildService } from './utils/bundler';
 
@@ -25,7 +25,7 @@ function App() {
 
   return (
     <div>
-      <MoncacoEditor value={userCode} onChange={setUserCode} />
+      <MonacoEditor value={userCode} onChange={setUserCode} />
       <CompileCodeScreen userCode={userCode} esbuildRef={esbuildRef} />
     </div>
   );
