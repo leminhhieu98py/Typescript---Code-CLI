@@ -1,8 +1,7 @@
-import React, { useEffect, useCallback, useRef, forwardRef } from 'react';
-import { compileCode } from '../utils/bundler';
+import React, { useEffect, useCallback, useRef } from 'react';
+import { bundler } from '../utils/bundler';
 interface CompileCodeScreenProps {
   userCode: string;
-  esbuildRef: any;
 }
 
 const iframeSrcDoc = `
@@ -23,10 +22,7 @@ const iframeSrcDoc = `
   </body>
 `;
 
-const CompileCodeScreen: React.FC<CompileCodeScreenProps> = ({
-  userCode,
-  esbuildRef
-}) => {
+const CompileCodeScreen: React.FC<CompileCodeScreenProps> = ({ userCode }) => {
   const iframeRef = useRef<any>(null);
 
   const resetIframeContent = useCallback(() => {
@@ -35,20 +31,16 @@ const CompileCodeScreen: React.FC<CompileCodeScreenProps> = ({
 
   const handleCodeChange = useCallback(
     async (userCode: string) => {
-      if (!esbuildRef.current) {
-        return;
-      }
-
       resetIframeContent();
 
-      const result = await compileCode(esbuildRef, userCode);
+      const result = await bundler(userCode);
 
       iframeRef.current.contentWindow.postMessage(
         result.outputFiles[0].text,
         '*'
       );
     },
-    [esbuildRef, resetIframeContent]
+    [resetIframeContent]
   );
 
   useEffect(() => {
