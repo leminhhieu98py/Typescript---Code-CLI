@@ -3,7 +3,7 @@ import { ESBUILD_WASM_URL } from '../common/const';
 import { unpkgPathPlugin } from '../plugins/unpkg-path-plugin';
 import { fetchPlugin } from '../plugins/fetch-plugin';
 
-export const bundler = async (userCode: string) => {
+export const bundleCode = async (userCode: string) => {
   const service = await esbuild.startService({
     worker: true,
     wasmURL: ESBUILD_WASM_URL

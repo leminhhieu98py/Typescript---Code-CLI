@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useRef } from 'react';
-import { bundler } from '../utils/bundler';
+import { bundleCode } from '../utils/bundler';
 interface CompileCodeScreenProps {
   userCode: string;
 }
@@ -33,7 +33,7 @@ const CompileCodeScreen: React.FC<CompileCodeScreenProps> = ({ userCode }) => {
     async (userCode: string) => {
       resetIframeContent();
 
-      const result = await bundler(userCode);
+      const result = await bundleCode(userCode);
 
       iframeRef.current.contentWindow.postMessage(
         result.outputFiles[0].text,
