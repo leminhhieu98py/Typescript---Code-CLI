@@ -76,7 +76,7 @@
 }
 
 .editor-container .mtk100.Identifier.JsxElement.Bracket {
-  color: #0080ff;
+  color: #fff;
 }
 
 .editor-container .mtk1000.Identifier.JsxOpeningElement.Bracket {
@@ -94,7 +94,7 @@
 }
 
 .editor-container .mtk102.Identifier.JsxClosingElement.Identifier {
-  color: #569cd6;
+  color: #E26FB7;
   font-weight: lighter;
 }
 
