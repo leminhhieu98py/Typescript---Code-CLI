@@ -1,9 +1,8 @@
 import 'bulmaswatch/superhero/bulmaswatch.min.css';
 import React, { useEffect, useState, useRef } from 'react';
-import * as esbuild from 'esbuild-wasm';
-import { ESBUILD_WASM_URL } from './common/const';
 import MoncacoEditor from './components/common/MonacoEditor/MonacoEditor';
 import CompileCodeScreen from './components/CompileCodeScreen';
+import { startEsbuildService } from './utils/bundler';
 
 const initialEditorValue = `import React from 'react';
   import ReactDOM from 'react-dom';
@@ -17,10 +16,7 @@ function App() {
   const esbuildRef = useRef<any>(null);
 
   const startEsbuild = async () => {
-    esbuildRef.current = await esbuild.startService({
-      worker: true,
-      wasmURL: ESBUILD_WASM_URL
-    });
+    esbuildRef.current = await startEsbuildService();
   };
 
   useEffect(() => {

@@ -1,6 +1,5 @@
 import React, { useEffect, useCallback, useRef, forwardRef } from 'react';
-import { unpkgPathPlugin } from '../plugins/unpkg-path-plugin';
-import { fetchPlugin } from '../plugins/fetch-plugin';
+import { compileCode } from '../utils/bundler';
 interface CompileCodeScreenProps {
   userCode: string;
   esbuildRef: any;
@@ -42,16 +41,7 @@ const CompileCodeScreen: React.FC<CompileCodeScreenProps> = ({
 
       resetIframeContent();
 
-      const result = await esbuildRef.current.build({
-        entryPoints: ['index.js'],
-        bundle: true,
-        write: false,
-        plugins: [unpkgPathPlugin(), fetchPlugin(userCode)],
-        define: {
-          'process.env.NODE_ENV': '"production"',
-          global: 'window'
-        }
-      });
+      const result = await compileCode(esbuildRef, userCode);
 
       iframeRef.current.contentWindow.postMessage(
         result.outputFiles[0].text,
