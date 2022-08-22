@@ -1,0 +1,18 @@
+.editor-container {
+  position: relative;
+  height: 100%;
+}
+
+.editor-container .button-floating {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s;
+  border-radius: 5px;
+}
+
+.editor-container:hover .button-floating {
+  opacity: 1;
+}

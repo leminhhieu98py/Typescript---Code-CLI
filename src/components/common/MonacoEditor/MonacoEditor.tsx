@@ -2,9 +2,10 @@ import React, { useRef } from 'react';
 import Editor, { EditorDidMount } from '@monaco-editor/react';
 import prettier from 'prettier';
 import parser from 'prettier/parser-babel';
-import styles from './MonacoEditor.module.scss';
 import codeShift from 'jscodeshift';
 import Highlighter from 'monaco-jsx-highlighter';
+import './monacoEditor.css';
+import './customHighlighter.css';
 interface MoncacoEditorProps {
   value: string;
   onChange: (value: string) => void;
@@ -46,9 +47,9 @@ const MoncacoEditor: React.FC<MoncacoEditorProps> = ({ value, onChange }) => {
   };
 
   return (
-    <div className={styles['editor-container']}>
+    <div className="editor-container">
       <button
-        className={`${styles['button-floating']} button button-format is-primary is-small`}
+        className="button-floating button button-format is-primary is-small"
         onClick={handleFormatCode}
       >
         Format
