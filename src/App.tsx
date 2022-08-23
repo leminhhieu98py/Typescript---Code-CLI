@@ -6,8 +6,8 @@ const App = () => {
   return (
     <>
       <CodeShell />
-      <CodeShell />
-      <CodeShell />
+      {/* <CodeShell />
+      <CodeShell /> */}
     </>
   );
 };
