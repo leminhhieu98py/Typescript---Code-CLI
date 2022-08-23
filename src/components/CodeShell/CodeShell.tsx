@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import './codeShell.css';
 import MoncacoEditor from '../common/MonacoEditor/MonacoEditor';
-import ResizeableBox from '../common/ResizeableBox/ResizeableBox';
-import CompileCodeScreen from '../CompileCodeScreen';
+import ResizableContainer from '../common/ResizeableBox/ResizeableBox';
+import CompileCodeScreen from '../CompileCodeScreen/CompileCodeScreen';
 
 const initialEditorValue = `
 import React, { useState } from 'react';
@@ -30,10 +31,14 @@ const CodeShell = () => {
 
   return (
     <div>
-      <ResizeableBox direction="horizontal">
-        <MoncacoEditor value={userCode} onChange={setUserCode} />
-      </ResizeableBox>
-      <CompileCodeScreen userCode={userCode} />
+      <ResizableContainer direction="vertical">
+        <div className="code-shell-container">
+          <ResizableContainer direction="horizontal">
+            <MoncacoEditor value={userCode} onChange={setUserCode} />
+          </ResizableContainer>
+          <CompileCodeScreen userCode={userCode} />
+        </div>
+      </ResizableContainer>
     </div>
   );
 };
