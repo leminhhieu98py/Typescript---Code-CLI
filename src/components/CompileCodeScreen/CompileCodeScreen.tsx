@@ -1,5 +1,7 @@
 import React, { useEffect, useCallback, useRef } from 'react';
-import { bundleCode } from '../utils/bundler';
+import { bundleCode } from '../../utils/bundler';
+import './compileCodeScreen.css';
+
 interface CompileCodeScreenProps {
   userCode: string;
 }
@@ -19,7 +21,7 @@ const iframeSrcDoc = `
         }
       }, false)
     </script>
-  </body>
+    </body>
 `;
 
 const CompileCodeScreen: React.FC<CompileCodeScreenProps> = ({ userCode }) => {
@@ -50,12 +52,15 @@ const CompileCodeScreen: React.FC<CompileCodeScreenProps> = ({ userCode }) => {
   }, [userCode, handleCodeChange]);
 
   return (
-    <iframe
-      ref={iframeRef}
-      sandbox="allow-scripts"
-      srcDoc={iframeSrcDoc}
-      title="code preview"
-    />
+    <div className="compile-code-iframe-container">
+      <iframe
+        className="compile-code-iframe"
+        ref={iframeRef}
+        sandbox="allow-scripts"
+        srcDoc={iframeSrcDoc}
+        title="code preview"
+      />
+    </div>
   );
 };
 
