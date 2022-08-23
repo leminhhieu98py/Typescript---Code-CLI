@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './codeShell.css';
 import MoncacoEditor from '../common/MonacoEditor/MonacoEditor';
-import ResizableContainer from '../common/ResizeableBox/ResizeableBox';
+import ResizableContainer from '../common/ResizableContainer/ResizableContainer';
 import CompileCodeScreen from '../CompileCodeScreen/CompileCodeScreen';
 
 const initialEditorValue = `
