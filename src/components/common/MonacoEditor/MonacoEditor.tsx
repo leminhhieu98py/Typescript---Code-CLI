@@ -58,7 +58,7 @@ const MoncacoEditor: React.FC<MoncacoEditorProps> = ({ value, onChange }) => {
         editorDidMount={onEditorDidMount}
         value={value}
         theme="dark"
-        height={500}
+        height="100%"
         language="javascript"
         options={{
           wordWrap: 'on',
