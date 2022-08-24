@@ -13,17 +13,24 @@ const ResizableContainer: React.FC<ResizableContainerProps> = ({
 }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-  console.log('windowWidth', windowWidth);
 
   useEffect(() => {
+    let resizeTimer: any;
+
     const windowResizeHandler = () => {
-      setWindowWidth(window.innerWidth);
-      setWindowHeight(window.innerHeight);
+      if (resizeTimer) clearTimeout(resizeTimer);
+
+      resizeTimer = setTimeout(() => {
+        setWindowWidth(window.innerWidth);
+        setWindowHeight(window.innerHeight);
+      }, 100);
     };
 
     window.addEventListener('resize', windowResizeHandler);
 
-    return () => window.removeEventListener('resize', windowResizeHandler);
+    return () => {
+      window.removeEventListener('resize', windowResizeHandler);
+    };
   }, []);
 
   const resizeableProps: ResizableBoxProps =
