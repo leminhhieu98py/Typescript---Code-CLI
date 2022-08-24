@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useRef } from 'react';
+import React, { useEffect, useCallback, useRef, useState } from 'react';
 import { bundleCode } from '../../utils/bundler';
 import './compileCodeScreen.css';
 
@@ -12,12 +12,21 @@ const iframeSrcDoc = `
     <div id="root"></div>
     <script>
       window.addEventListener('message', (event) => {
-        try {
-          eval(event.data);
-        } catch (err) {
+        const handleError = (err) => {
           const root = document.getElementById('root');
           root.innerHTML = '<div style="color: red;"><h4>Runtime error:</h4>' + err + '</div>';
           console.error(err);
+        }
+
+        window.addEventListener('error', (e) => {
+          e.preventDefault();
+          handleError(e.error.message)
+        })
+
+        try {
+          eval(event.data);
+        } catch (err) {
+          throw err;
         }
       }, false)
     </script>
@@ -26,6 +35,7 @@ const iframeSrcDoc = `
 
 const CompileCodeScreen: React.FC<CompileCodeScreenProps> = ({ userCode }) => {
   const iframeRef = useRef<any>(null);
+  const [error, setError] = useState<string>('');
 
   const resetIframeContent = useCallback(() => {
     iframeRef.current.srcdoc = iframeSrcDoc;
@@ -37,10 +47,8 @@ const CompileCodeScreen: React.FC<CompileCodeScreenProps> = ({ userCode }) => {
 
       const result = await bundleCode(userCode);
 
-      iframeRef.current.contentWindow.postMessage(
-        result.outputFiles[0].text,
-        '*'
-      );
+      iframeRef.current.contentWindow.postMessage(result.code, '*');
+      setError(result.err);
     },
     [resetIframeContent]
   );
@@ -60,6 +68,7 @@ const CompileCodeScreen: React.FC<CompileCodeScreenProps> = ({ userCode }) => {
         srcDoc={iframeSrcDoc}
         title="code preview"
       />
+      {error && <span className="compile-code-error">{error}</span>}
     </div>
   );
 };
