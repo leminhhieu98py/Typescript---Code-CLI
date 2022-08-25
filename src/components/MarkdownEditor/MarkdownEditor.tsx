@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import MDEditor from '@uiw/react-md-editor';
+import './markdownEditor.css';
 
 const MarkdownEditor = () => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
