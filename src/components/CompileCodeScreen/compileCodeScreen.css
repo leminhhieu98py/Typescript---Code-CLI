@@ -1,0 +1,29 @@
+.compile-code-iframe {
+    background-color: #fff;
+    height: 100%;
+    width: 100%;
+}
+
+.compile-code-iframe-container {
+    position: relative;
+    height: 100%;
+    flex-grow: 1;
+}
+
+.react-draggable-transparent-selection .compile-code-iframe-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.compile-code-error {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-family: 'Times New Roman', Times, serif;
+    color: red;
+    font-weight: 600;
+}
