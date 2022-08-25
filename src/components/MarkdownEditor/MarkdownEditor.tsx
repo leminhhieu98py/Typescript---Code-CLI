@@ -28,7 +28,7 @@ const MarkdownEditor = () => {
   }, []);
 
   return (
-    <div ref={mdEditorRef}>
+    <div className="text-editor" ref={mdEditorRef}>
       {isEditing ? <MDEditor /> : <MDEditor.Markdown source="# hello" />}
     </div>
   );
