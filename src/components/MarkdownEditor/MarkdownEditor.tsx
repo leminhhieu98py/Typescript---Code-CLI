@@ -29,12 +29,16 @@ const MarkdownEditor = () => {
   }, []);
 
   return (
-    <div className="text-editor" ref={mdEditorRef}>
-      {isEditing ? (
-        <MDEditor value={content} onChange={(e) => setContent(e as string)} />
-      ) : (
-        <MDEditor.Markdown source={content ? content : `### Start to write a document here`} />
-      )}
+    <div className="text-editor card" ref={mdEditorRef}>
+      <div className="card-content">
+        {isEditing ? (
+          <MDEditor value={content} onChange={(e) => setContent(e as string)} />
+        ) : (
+          <MDEditor.Markdown
+            source={content ? content : `### Start to write a document here`}
+          />
+        )}
+      </div>
     </div>
   );
 };
