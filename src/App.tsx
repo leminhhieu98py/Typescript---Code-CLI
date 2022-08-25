@@ -7,7 +7,7 @@ const App = () => {
   return (
     <>
       <MarkdownEditor />
-      {/* <CodeShell /> */}
+      <CodeShell />
     </>
   );
 };
