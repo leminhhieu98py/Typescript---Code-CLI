@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './codeShell.css';
+import './codeCell.css';
 import MoncacoEditor from '../common/MonacoEditor/MonacoEditor';
 import ResizableContainer from '../common/ResizableContainer/ResizableContainer';
 import CompileCodeScreen from '../CompileCodeScreen/CompileCodeScreen';
@@ -26,7 +26,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
 `;
 
-const CodeShell = () => {
+const CodeCell = () => {
   const [userCode, setUserCode] = useState<string>(initialEditorValue);
 
   return (
@@ -43,4 +43,4 @@ const CodeShell = () => {
   );
 };
 
-export default CodeShell;
+export default CodeCell;

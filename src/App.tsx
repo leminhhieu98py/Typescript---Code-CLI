@@ -1,13 +1,11 @@
 import 'bulmaswatch/superhero/bulmaswatch.min.css';
 import React, { useState } from 'react';
-import CodeShell from './components/CodeShell/CodeShell';
+import CodeCell from './components/CodeCell/CodeCell';
 
 const App = () => {
   return (
     <>
-      <CodeShell />
-      {/* <CodeShell />
-      <CodeShell /> */}
+      <CodeCell />
     </>
   );
 };
