@@ -1,4 +1,5 @@
 import { ActionType } from '../actionTypes';
+import { CellType } from '../interfaces/Cell';
 
 interface MoveCellAction {
   type: ActionType.MOVE_CELL;
@@ -27,7 +28,7 @@ interface InsertCellBeforeAction {
   type: ActionType.INSERT_CELL_BEFORE;
   payload: {
     id: string;
-    type: 'code' | 'markdown';
+    type: CellType;
   };
 }
 
