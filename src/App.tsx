@@ -1,13 +1,13 @@
 import 'bulmaswatch/superhero/bulmaswatch.min.css';
 import React from 'react';
-import CodeShell from './components/CodeShell/CodeShell';
+import CodeCell from './components/CodeCell/CodeCell';
 import MarkdownEditor from './components/MarkdownEditor/MarkdownEditor';
 
 const App = () => {
   return (
     <>
       <MarkdownEditor />
-      <CodeShell />
+      <CodeCell />
     </>
   );
 };
