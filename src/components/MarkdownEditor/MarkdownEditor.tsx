@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import MDEditor from '@uiw/react-md-editor';
 import './markdownEditor.css';
 
+// test push directly to develop
+
 const MarkdownEditor = () => {
   const [content, setContent] = useState<string>('');
   const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -32,7 +34,7 @@ const MarkdownEditor = () => {
     <div className="text-editor card" ref={mdEditorRef}>
       <div className="card-content">
         {isEditing ? (
-          <MDEditor value={content} onChange={(e) => setContent(e as string)} />
+          <MDEditor value={content ? content : `### Start to write a document here`} onChange={(e) => setContent(e as string)} />
         ) : (
           <MDEditor.Markdown
             source={content ? content : `### Start to write a document here`}
