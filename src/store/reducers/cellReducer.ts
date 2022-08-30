@@ -60,7 +60,6 @@ const reducer = produce(
       case ActionType.INSERT_CELL_BEFORE:
         const index = state.order.findIndex((id) => id === action.payload.id);
         const newCellId = createRandomId();
-        console.log('index', index);
 
         if (index !== -1) {
           state.order.splice(index, 0, newCellId);
