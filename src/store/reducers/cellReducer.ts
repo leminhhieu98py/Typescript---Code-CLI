@@ -16,8 +16,17 @@ interface CellState {
 const initialState: CellState = {
   isLoading: false,
   error: null,
-  order: [],
-  data: {}
+  order: ['123', '1233'],
+  data: {
+    '123': {
+      type: 'code',
+      content: `console.log('Hello World');`
+    },
+    '1233': {
+      type: 'markdown',
+      content: '# Hello world'
+    }
+  }
 };
 
 const reducer = produce(
