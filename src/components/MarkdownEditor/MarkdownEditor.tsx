@@ -1,9 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import MDEditor from '@uiw/react-md-editor';
 import './markdownEditor.css';
 
-const MarkdownEditor = () => {
-  const [content, setContent] = useState<string>('');
+interface MarkdownEditorProps {
+  id: string;
+  content: string;
+}
+
+const MarkdownEditor: React.FC<MarkdownEditorProps> = ({ id, content }) => {
+  const [content2, setContent] = useState<string>('');
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const mdEditorRef = useRef<HTMLDivElement | null>(null);
 
@@ -32,7 +37,10 @@ const MarkdownEditor = () => {
     <div className="text-editor card" ref={mdEditorRef}>
       <div className="card-content">
         {isEditing ? (
-          <MDEditor value={content ? content : `### Start to write a document here`} onChange={(e) => setContent(e as string)} />
+          <MDEditor
+            value={content ? content : `### Start to write a document here`}
+            onChange={(e) => setContent(e as string)}
+          />
         ) : (
           <MDEditor.Markdown
             source={content ? content : `### Start to write a document here`}
