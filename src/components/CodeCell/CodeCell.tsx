@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './codeCell.css';
 import MoncacoEditor from '../common/MonacoEditor/MonacoEditor';
 import ResizableContainer from '../common/ResizableContainer/ResizableContainer';
@@ -26,7 +26,12 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
 `;
 
-const CodeCell = () => {
+interface CodeCellProps {
+  id: string;
+  content: string;
+}
+
+const CodeCell: React.FC<CodeCellProps> = ({ id, content }) => {
   const [userCode, setUserCode] = useState<string>(initialEditorValue);
 
   return (
@@ -34,9 +39,9 @@ const CodeCell = () => {
       <ResizableContainer direction="vertical">
         <div className="code-shell-container">
           <ResizableContainer direction="horizontal">
-            <MoncacoEditor value={userCode} onChange={setUserCode} />
+            <MoncacoEditor value={content} onChange={setUserCode} />
           </ResizableContainer>
-          <CompileCodeScreen userCode={userCode} />
+          <CompileCodeScreen userCode={content} />
         </div>
       </ResizableContainer>
     </div>
