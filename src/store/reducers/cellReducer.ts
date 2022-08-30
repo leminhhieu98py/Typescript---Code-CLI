@@ -1,3 +1,5 @@
+import produce from 'immer';
+
 import { Action } from '../actions';
 import { ActionType } from '../actionTypes';
 import { Cell } from '../interfaces/Cell';
@@ -18,36 +20,56 @@ const initialState: CellState = {
   data: {}
 };
 
-const reducer = (
-  state: CellState = initialState,
-  action: Action
-): CellState => {
-  switch (action.type) {
-    case ActionType.MOVE_CELL:
-      return {
-        ...state
-      };
-    case ActionType.UPDATE_CELL:
-      const { id, content } = action.payload;
-      const { data } = state;
-      return {
-        ...state,
-        data: {
-          ...data,
-          [id]: {
-            ...data[id],
-            content
-          }
-        }
-      };
-    case ActionType.DELETE_CELL:
-      return state;
-    case ActionType.INSERT_CELL_BEFORE:
-      return state;
+const reducer = produce(
+  (state: CellState = initialState, action: Action): CellState => {
+    switch (action.type) {
+      case ActionType.MOVE_CELL:
+        const foundIndex = state.order.findIndex(
+          (id) => id === action.payload.id
+        );
+        if (foundIndex === -1) return state;
 
-    default:
-      return state;
+        const targetIndex =
+          action.payload.direction === 'up' ? foundIndex - 1 : foundIndex + 1;
+        if (targetIndex === -1 || targetIndex === state.order.length)
+          return state;
+
+        const targetValue = state.order[targetIndex];
+        state.order[targetIndex] = state.order[foundIndex];
+        state.order[foundIndex] = targetValue;
+        return state;
+
+      case ActionType.UPDATE_CELL:
+        state.data[action.payload.id].content = action.payload.content;
+        return state;
+
+      case ActionType.DELETE_CELL:
+        delete state.data[action.payload.id];
+        state.order = state.order.filter((id) => id !== action.payload.id);
+        return state;
+
+      case ActionType.INSERT_CELL_BEFORE:
+        const index = state.order.findIndex((id) => id === action.payload.id);
+        const newCellId = createRandomId();
+        console.log('index', index);
+
+        if (index !== -1) {
+          state.order.splice(index, 0, newCellId);
+          state.data[newCellId] = {
+            type: action.payload.type,
+            content: ''
+          };
+        }
+        return state;
+
+      default:
+        return state;
+    }
   }
-};
+);
 
 export default reducer;
+
+const createRandomId = () => {
+  return new Date().getTime().toString();
+};
