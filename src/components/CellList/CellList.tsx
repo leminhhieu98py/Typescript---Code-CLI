@@ -1,9 +1,16 @@
+import { useEffect } from 'react';
+import useAction from '../../hooks/useAction';
 import CodeCell from '../CodeCell/CodeCell';
 import MarkdownEditor from '../MarkdownEditor/MarkdownEditor';
 import useTypeSelector from './../../hooks/useTypeSelector';
 
 const CellList = () => {
   const cellState = useTypeSelector((state) => state.cell);
+  const { insertCellBefore } = useAction();
+  
+  useEffect(() => {
+    insertCellBefore('1233', 'code');
+  }, []);
 
   return (
     <>
