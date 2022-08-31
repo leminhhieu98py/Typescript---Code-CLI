@@ -39,7 +39,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
 
   return (
     <div className="text-editor card" ref={mdEditorRef}>
-      <div className="card-content">
+      <div className="card-content card-content--black">
         {isEditing ? (
           <MDEditor
             value={content ? content : `### Start to write a document here`}

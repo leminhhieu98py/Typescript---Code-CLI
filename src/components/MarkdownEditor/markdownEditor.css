@@ -25,6 +25,8 @@
 }
 
 .w-md-editor-bar {
+    position: absolute;
+    bottom: -10px;
     height: 10px;
     width: 100%;
     cursor: row-resize;
@@ -79,4 +81,8 @@
 
 .text-editor .token.list.punctuation {
     background-color: unset;
+}
+
+.card-content.card-content--black {
+    background-color: #202124;
 }
