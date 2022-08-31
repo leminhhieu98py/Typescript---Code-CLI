@@ -33,7 +33,6 @@ interface CodeCellProps {
 }
 
 const CodeCell: React.FC<CodeCellProps> = ({ id, content, updateCell }) => {
-  const [userCode, setUserCode] = useState<string>(initialEditorValue);
 
   return (
     <div>
