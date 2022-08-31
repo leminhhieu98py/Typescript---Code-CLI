@@ -29,9 +29,10 @@ root.render(<App />);
 interface CodeCellProps {
   id: string;
   content: string;
+  updateCell: (id: string, content: string) => {};
 }
 
-const CodeCell: React.FC<CodeCellProps> = ({ id, content }) => {
+const CodeCell: React.FC<CodeCellProps> = ({ id, content, updateCell }) => {
   const [userCode, setUserCode] = useState<string>(initialEditorValue);
 
   return (
@@ -39,7 +40,10 @@ const CodeCell: React.FC<CodeCellProps> = ({ id, content }) => {
       <ResizableContainer direction="vertical">
         <div className="code-shell-container">
           <ResizableContainer direction="horizontal">
-            <MoncacoEditor value={content} onChange={setUserCode} />
+            <MoncacoEditor
+              value={content}
+              onChange={(e) => updateCell(id, e)}
+            />
           </ResizableContainer>
           <CompileCodeScreen userCode={content} />
         </div>

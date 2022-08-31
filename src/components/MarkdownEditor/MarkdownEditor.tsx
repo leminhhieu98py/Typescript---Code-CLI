@@ -5,10 +5,14 @@ import './markdownEditor.css';
 interface MarkdownEditorProps {
   id: string;
   content: string;
+  updateCell: (id: string, content: string) => {};
 }
 
-const MarkdownEditor: React.FC<MarkdownEditorProps> = ({ id, content }) => {
-  const [content2, setContent] = useState<string>('');
+const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
+  id,
+  content,
+  updateCell
+}) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const mdEditorRef = useRef<HTMLDivElement | null>(null);
 
@@ -39,7 +43,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({ id, content }) => {
         {isEditing ? (
           <MDEditor
             value={content ? content : `### Start to write a document here`}
-            onChange={(e) => setContent(e as string)}
+            onChange={(e) => updateCell(id, e as string)}
           />
         ) : (
           <MDEditor.Markdown
