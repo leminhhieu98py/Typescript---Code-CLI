@@ -11,6 +11,8 @@ interface ResizableContainerProps {
 
 const DEFAULT_WIDTH_PERCENT = 0.5;
 const DEFAULT_HEIGHT_PERCENT = 0.4;
+const MIN_CONSTRAINT = 0.1;
+const MAX_CONSTRAINT = 0.9;
 
 const ResizableContainer: React.FC<ResizableContainerProps> = ({
   direction,
@@ -45,15 +47,15 @@ const ResizableContainer: React.FC<ResizableContainerProps> = ({
       ? {
           width: Infinity,
           height: windowHeight * heightPercent,
-          minConstraints: [Infinity, windowHeight * 0.1],
-          maxConstraints: [Infinity, windowHeight * 0.9],
+          minConstraints: [Infinity, windowHeight * MIN_CONSTRAINT],
+          maxConstraints: [Infinity, windowHeight * MAX_CONSTRAINT],
           resizeHandles: ['s']
         }
       : {
           width: windowWidth * widthPercent,
           height: Infinity,
-          minConstraints: [windowWidth * 0.1, Infinity],
-          maxConstraints: [windowWidth * 0.9, Infinity],
+          minConstraints: [windowWidth * MIN_CONSTRAINT, Infinity],
+          maxConstraints: [windowWidth * MAX_CONSTRAINT, Infinity],
           resizeHandles: ['e'],
           className: 'resize-horizontal'
         };
