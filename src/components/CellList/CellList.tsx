@@ -21,6 +21,7 @@ const CellList = () => {
                 deleteCell={deleteCell}
                 moveCell={moveCell}
                 insertCellBefore={insertCellBefore}
+                isLastCell={cellState.order.length === 1}
               />
               {cell.type === 'code' && (
                 <CodeCell

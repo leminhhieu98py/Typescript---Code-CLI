@@ -4,6 +4,7 @@ import { CellType } from '../../store/interfaces/Cell';
 import './actionBar.css';
 interface ActionBarProps {
   id: string;
+  isLastCell: boolean;
   deleteCell: (id: string) => {};
   moveCell: (id: string, direction: Direction) => {};
   insertCellBefore: (id: string, type: CellType) => {};
@@ -11,6 +12,7 @@ interface ActionBarProps {
 
 const ActionBar: React.FC<ActionBarProps> = ({
   id,
+  isLastCell,
   deleteCell,
   moveCell,
   insertCellBefore
@@ -33,30 +35,34 @@ const ActionBar: React.FC<ActionBarProps> = ({
           <i className="fas fa-code"></i>
         </span>
       </button>
-      <button
-        className="button is-primary is-small"
-        onClick={() => moveCell(id, 'up')}
-      >
-        <span className="icon">
-          <i className="fas fa-arrow-up"></i>
-        </span>
-      </button>
-      <button
-        className="button is-primary is-small"
-        onClick={() => moveCell(id, 'down')}
-      >
-        <span className="icon">
-          <i className="fas fa-arrow-down"></i>
-        </span>
-      </button>
-      <button
-        className="button is-primary is-small"
-        onClick={() => deleteCell(id)}
-      >
-        <span className="icon">
-          <i className="fas fa-times"></i>
-        </span>
-      </button>
+      {!isLastCell && (
+        <>
+          <button
+            className="button is-primary is-small"
+            onClick={() => moveCell(id, 'up')}
+          >
+            <span className="icon">
+              <i className="fas fa-arrow-up"></i>
+            </span>
+          </button>
+          <button
+            className="button is-primary is-small"
+            onClick={() => moveCell(id, 'down')}
+          >
+            <span className="icon">
+              <i className="fas fa-arrow-down"></i>
+            </span>
+          </button>
+          <button
+            className="button is-primary is-small"
+            onClick={() => deleteCell(id)}
+          >
+            <span className="icon">
+              <i className="fas fa-times"></i>
+            </span>
+          </button>
+        </>
+      )}
     </div>
   );
 };
