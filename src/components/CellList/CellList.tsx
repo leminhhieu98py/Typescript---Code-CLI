@@ -7,7 +7,7 @@ import './cellList.css';
 
 const CellList = () => {
   const cellState = useTypeSelector((state) => state.cell);
-  const { updateCell, deleteCell, moveCell } = useAction();
+  const { updateCell, deleteCell, moveCell, insertCellBefore } = useAction();
 
   return (
     <>
@@ -16,7 +16,12 @@ const CellList = () => {
           const cell = cellState.data[id];
           return (
             <div className="cell-item-container" key={id}>
-              <ActionBar id={id} deleteCell={deleteCell} moveCell={moveCell} />
+              <ActionBar
+                id={id}
+                deleteCell={deleteCell}
+                moveCell={moveCell}
+                insertCellBefore={insertCellBefore}
+              />
               {cell.type === 'code' && (
                 <CodeCell
                   id={id}

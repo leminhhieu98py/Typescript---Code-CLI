@@ -1,15 +1,38 @@
 import React from 'react';
 import { Direction } from '../../store/actions';
+import { CellType } from '../../store/interfaces/Cell';
 import './actionBar.css';
 interface ActionBarProps {
   id: string;
   deleteCell: (id: string) => {};
   moveCell: (id: string, direction: Direction) => {};
+  insertCellBefore: (id: string, type: CellType) => {};
 }
 
-const ActionBar: React.FC<ActionBarProps> = ({ id, deleteCell, moveCell }) => {
+const ActionBar: React.FC<ActionBarProps> = ({
+  id,
+  deleteCell,
+  moveCell,
+  insertCellBefore
+}) => {
   return (
     <div className="action-bar">
+      <button
+        className="button is-primary is-small"
+        onClick={() => insertCellBefore(id, 'markdown')}
+      >
+        <span className="icon">
+          <i className="fas fa-book-bookmark"></i>
+        </span>
+      </button>
+      <button
+        className="button is-primary is-small"
+        onClick={() => insertCellBefore(id, 'code')}
+      >
+        <span className="icon">
+          <i className="fas fa-code"></i>
+        </span>
+      </button>
       <button
         className="button is-primary is-small"
         onClick={() => moveCell(id, 'up')}
