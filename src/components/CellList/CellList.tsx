@@ -3,6 +3,7 @@ import ActionBar from '../ActionBar/ActionBar';
 import CodeCell from '../CodeCell/CodeCell';
 import MarkdownEditor from '../MarkdownEditor/MarkdownEditor';
 import useTypeSelector from './../../hooks/useTypeSelector';
+import './cellList.css';
 
 const CellList = () => {
   const cellState = useTypeSelector((state) => state.cell);
@@ -14,7 +15,7 @@ const CellList = () => {
         cellState.order.map((id) => {
           const cell = cellState.data[id];
           return (
-            <div key={id}>
+            <div className="cell-item-container" key={id}>
               <ActionBar id={id} deleteCell={deleteCell} moveCell={moveCell} />
               {cell.type === 'code' && (
                 <CodeCell
