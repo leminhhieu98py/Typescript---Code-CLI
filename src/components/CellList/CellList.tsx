@@ -1,29 +1,31 @@
 import useAction from '../../hooks/useAction';
+import ActionBar from '../ActionBar/ActionBar';
 import CodeCell from '../CodeCell/CodeCell';
 import MarkdownEditor from '../MarkdownEditor/MarkdownEditor';
 import useTypeSelector from './../../hooks/useTypeSelector';
 
 const CellList = () => {
   const cellState = useTypeSelector((state) => state.cell);
-  const { updateCell } = useAction();
+  const { updateCell, deleteCell, moveCell } = useAction();
 
   return (
     <>
       {cellState.order.length > 0 &&
-        cellState.order.map((orderId) => {
-          const cell = cellState.data[orderId];
+        cellState.order.map((id) => {
+          const cell = cellState.data[id];
           return (
-            <div key={orderId}>
+            <div key={id}>
+              <ActionBar id={id} deleteCell={deleteCell} moveCell={moveCell} />
               {cell.type === 'code' && (
                 <CodeCell
-                  id={orderId}
+                  id={id}
                   content={cell.content}
                   updateCell={updateCell}
                 />
               )}
               {cell.type === 'markdown' && (
                 <MarkdownEditor
-                  id={orderId}
+                  id={id}
                   content={cell.content}
                   updateCell={updateCell}
                 />
