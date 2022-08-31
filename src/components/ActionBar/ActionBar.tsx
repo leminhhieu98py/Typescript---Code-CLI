@@ -1,6 +1,6 @@
 import React from 'react';
 import { Direction } from '../../store/actions';
-
+import './actionBar.css';
 interface ActionBarProps {
   id: string;
   deleteCell: (id: string) => {};
@@ -9,7 +9,7 @@ interface ActionBarProps {
 
 const ActionBar: React.FC<ActionBarProps> = ({ id, deleteCell, moveCell }) => {
   return (
-    <div>
+    <div className="action-bar">
       <button
         className="button is-primary is-small"
         onClick={() => moveCell(id, 'up')}
