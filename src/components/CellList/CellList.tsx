@@ -7,7 +7,7 @@ import './cellList.css';
 
 const CellList = () => {
   const cellState = useTypeSelector((state) => state.cell);
-  const { updateCell, deleteCell, moveCell, insertCellBefore } = useAction();
+  const { updateCell, deleteCell, moveCell, insertCellAfter } = useAction();
 
   return (
     <>
@@ -20,7 +20,7 @@ const CellList = () => {
                 id={id}
                 deleteCell={deleteCell}
                 moveCell={moveCell}
-                insertCellBefore={insertCellBefore}
+                insertCellAfter={insertCellAfter}
                 isLastCell={cellState.order.length === 1}
               />
               {cell.type === 'code' && (

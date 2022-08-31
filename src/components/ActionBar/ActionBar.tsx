@@ -7,7 +7,7 @@ interface ActionBarProps {
   isLastCell: boolean;
   deleteCell: (id: string) => {};
   moveCell: (id: string, direction: Direction) => {};
-  insertCellBefore: (id: string, type: CellType) => {};
+  insertCellAfter: (id: string, type: CellType) => {};
 }
 
 const ActionBar: React.FC<ActionBarProps> = ({
@@ -15,13 +15,13 @@ const ActionBar: React.FC<ActionBarProps> = ({
   isLastCell,
   deleteCell,
   moveCell,
-  insertCellBefore
+  insertCellAfter
 }) => {
   return (
     <div className="action-bar">
       <button
         className="button is-primary is-small"
-        onClick={() => insertCellBefore(id, 'markdown')}
+        onClick={() => insertCellAfter(id, 'markdown')}
       >
         <span className="icon">
           <i className="fas fa-book-bookmark"></i>
@@ -29,7 +29,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
       </button>
       <button
         className="button is-primary is-small"
-        onClick={() => insertCellBefore(id, 'code')}
+        onClick={() => insertCellAfter(id, 'code')}
       >
         <span className="icon">
           <i className="fas fa-code"></i>

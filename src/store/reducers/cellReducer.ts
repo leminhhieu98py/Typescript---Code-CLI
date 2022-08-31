@@ -57,12 +57,12 @@ const reducer = produce(
         state.order = state.order.filter((id) => id !== action.payload.id);
         return state;
 
-      case ActionType.INSERT_CELL_BEFORE:
+      case ActionType.INSERT_CELL_AFTER:
         const index = state.order.findIndex((id) => id === action.payload.id);
         const newCellId = createRandomId();
 
         if (index !== -1) {
-          state.order.splice(index, 0, newCellId);
+          state.order.splice(index + 1, 0, newCellId);
           state.data[newCellId] = {
             type: action.payload.type,
             content: ''
