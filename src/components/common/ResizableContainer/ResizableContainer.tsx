@@ -5,11 +5,18 @@ import './resizableContainer.css';
 interface ResizableContainerProps {
   direction: 'vertical' | 'horizontal';
   children: React.ReactNode;
+  widthPercent?: number;
+  heightPercent?: number;
 }
+
+const DEFAULT_WIDTH_PERCENT = 0.5;
+const DEFAULT_HEIGHT_PERCENT = 0.4;
 
 const ResizableContainer: React.FC<ResizableContainerProps> = ({
   direction,
-  children
+  children,
+  widthPercent = DEFAULT_WIDTH_PERCENT,
+  heightPercent = DEFAULT_HEIGHT_PERCENT
 }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
@@ -37,13 +44,13 @@ const ResizableContainer: React.FC<ResizableContainerProps> = ({
     direction === 'vertical'
       ? {
           width: Infinity,
-          height: windowHeight * 0.75,
+          height: windowHeight * heightPercent,
           minConstraints: [Infinity, windowHeight * 0.1],
           maxConstraints: [Infinity, windowHeight * 0.9],
           resizeHandles: ['s']
         }
       : {
-          width: windowWidth * 0.75,
+          width: windowWidth * widthPercent,
           height: Infinity,
           minConstraints: [windowWidth * 0.1, Infinity],
           maxConstraints: [windowWidth * 0.9, Infinity],
