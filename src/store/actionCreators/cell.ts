@@ -49,3 +49,22 @@ export const insertCellAfter = (
     }
   };
 };
+
+export const startBundling = (cellId: string) => {
+  return {
+    type: ActionType.START_BUNDLING,
+    payload: {
+      cellId
+    }
+  };
+};
+
+export const stopBundling = (cellId: string, error: string | null) => {
+  return {
+    type: ActionType.STOP_BUNDLING,
+    payload: {
+      cellId,
+      error
+    }
+  };
+};
