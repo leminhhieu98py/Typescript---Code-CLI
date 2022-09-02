@@ -33,8 +33,25 @@ export interface InsertCellAfterAction {
   };
 }
 
+export interface StartBundling {
+  type: ActionType.START_BUNDLING;
+  payload: {
+    cellId: string;
+  };
+}
+
+export interface StopBundling {
+  type: ActionType.STOP_BUNDLING;
+  payload: {
+    cellId: string;
+    error: string | null;
+  };
+}
+
 export type Action =
   | MoveCellAction
   | UpdateCellAction
   | DeleteCellAction
-  | InsertCellAfterAction;
+  | InsertCellAfterAction
+  | StartBundling
+  | StopBundling;
