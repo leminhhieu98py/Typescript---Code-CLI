@@ -35,7 +35,12 @@ const MoncacoEditor: React.FC<MoncacoEditorProps> = ({ value, onChange }) => {
       editor
     );
 
-    highlightCode.highLightOnDidChangeModelContent();
+    highlightCode.highLightOnDidChangeModelContent(
+      () => {},
+      () => {},
+      undefined,
+      () => {}
+    );
   };
 
   const handleFormatCode = () => {
