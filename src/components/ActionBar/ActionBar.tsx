@@ -1,6 +1,6 @@
 import React from 'react';
 import { Direction } from '../../store/actions';
-import { CellType } from '../../store/interfaces/Cell';
+import { CellType } from '../../store/interfaces';
 import './actionBar.css';
 interface ActionBarProps {
   id: string;

@@ -2,7 +2,7 @@ import produce from 'immer';
 
 import { CellAction } from '../actions';
 import { CellActionType } from '../actionTypes';
-import { Cell } from '../interfaces/Cell';
+import { Cell } from '../interfaces';
 
 interface CellState {
   order: string[];
