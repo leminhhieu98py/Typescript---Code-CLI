@@ -5,12 +5,12 @@ import {
   InsertCellAfterAction,
   Direction
 } from '../actions';
-import { ActionType } from '../actionTypes';
+import { CellActionType } from '../actionTypes';
 import { CellType } from '../interfaces/Cell';
 
 export const moveCell = (id: string, direction: Direction): MoveCellAction => {
   return {
-    type: ActionType.MOVE_CELL,
+    type: CellActionType.MOVE_CELL,
     payload: {
       id,
       direction
@@ -20,7 +20,7 @@ export const moveCell = (id: string, direction: Direction): MoveCellAction => {
 
 export const updateCell = (id: string, content: string): UpdateCellAction => {
   return {
-    type: ActionType.UPDATE_CELL,
+    type: CellActionType.UPDATE_CELL,
     payload: {
       id,
       content
@@ -30,7 +30,7 @@ export const updateCell = (id: string, content: string): UpdateCellAction => {
 
 export const deleteCell = (id: string): DeleteCellAction => {
   return {
-    type: ActionType.DELETE_CELL,
+    type: CellActionType.DELETE_CELL,
     payload: {
       id
     }
@@ -42,7 +42,7 @@ export const insertCellAfter = (
   type: CellType
 ): InsertCellAfterAction => {
   return {
-    type: ActionType.INSERT_CELL_AFTER,
+    type: CellActionType.INSERT_CELL_AFTER,
     payload: {
       id,
       type
@@ -52,7 +52,7 @@ export const insertCellAfter = (
 
 export const startBundling = (cellId: string) => {
   return {
-    type: ActionType.START_BUNDLING,
+    type: CellActionType.START_BUNDLING,
     payload: {
       cellId
     }
@@ -61,7 +61,7 @@ export const startBundling = (cellId: string) => {
 
 export const stopBundling = (cellId: string, error: string | null) => {
   return {
-    type: ActionType.STOP_BUNDLING,
+    type: CellActionType.STOP_BUNDLING,
     payload: {
       cellId,
       error

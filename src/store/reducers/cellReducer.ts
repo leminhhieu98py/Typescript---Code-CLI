@@ -1,7 +1,7 @@
 import produce from 'immer';
 
 import { CellAction } from '../actions';
-import { ActionType } from '../actionTypes';
+import { CellActionType } from '../actionTypes';
 import { Cell } from '../interfaces/Cell';
 
 interface CellState {
@@ -32,7 +32,7 @@ const initialState: CellState = {
 const reducer = produce(
   (state: CellState = initialState, action: CellAction): CellState => {
     switch (action.type) {
-      case ActionType.MOVE_CELL:
+      case CellActionType.MOVE_CELL:
         const foundIndex = state.order.findIndex(
           (id) => id === action.payload.id
         );
@@ -48,16 +48,16 @@ const reducer = produce(
         state.order[foundIndex] = targetValue;
         return state;
 
-      case ActionType.UPDATE_CELL:
+      case CellActionType.UPDATE_CELL:
         state.data[action.payload.id].content = action.payload.content;
         return state;
 
-      case ActionType.DELETE_CELL:
+      case CellActionType.DELETE_CELL:
         delete state.data[action.payload.id];
         state.order = state.order.filter((id) => id !== action.payload.id);
         return state;
 
-      case ActionType.INSERT_CELL_AFTER:
+      case CellActionType.INSERT_CELL_AFTER:
         const index = state.order.findIndex((id) => id === action.payload.id);
         const newCellId = createRandomId();
 
@@ -72,11 +72,11 @@ const reducer = produce(
         }
         return state;
 
-      case ActionType.START_BUNDLING:
+      case CellActionType.START_BUNDLING:
         state.data[action.payload.cellId].isLoading = true;
         return state;
 
-      case ActionType.STOP_BUNDLING:
+      case CellActionType.STOP_BUNDLING:
         state.data[action.payload.cellId].isLoading = false;
         if (action.payload.error) {
           state.data[action.payload.cellId].error = action.payload.error;
