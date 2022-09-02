@@ -1,6 +1,6 @@
 import produce from 'immer';
 
-import { Action } from '../actions';
+import { CellAction } from '../actions';
 import { ActionType } from '../actionTypes';
 import { Cell } from '../interfaces/Cell';
 
@@ -30,7 +30,7 @@ const initialState: CellState = {
 };
 
 const reducer = produce(
-  (state: CellState = initialState, action: Action): CellState => {
+  (state: CellState = initialState, action: CellAction): CellState => {
     switch (action.type) {
       case ActionType.MOVE_CELL:
         const foundIndex = state.order.findIndex(
