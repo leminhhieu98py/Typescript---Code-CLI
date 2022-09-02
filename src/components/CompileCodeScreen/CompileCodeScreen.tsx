@@ -1,9 +1,12 @@
 import React, { useEffect, useCallback, useRef, useState } from 'react';
 import { bundleCode } from '../../utils/bundler';
 import './compileCodeScreen.css';
+import useAction from './../../hooks/useAction';
+import useTypeSelector from '../../hooks/useTypeSelector';
 
 interface CompileCodeScreenProps {
   userCode: string;
+  id: string;
 }
 
 const iframeSrcDoc = `
@@ -33,9 +36,13 @@ const iframeSrcDoc = `
     </body>
 `;
 
-const CompileCodeScreen: React.FC<CompileCodeScreenProps> = ({ userCode }) => {
+const CompileCodeScreen: React.FC<CompileCodeScreenProps> = ({
+  userCode,
+  id
+}) => {
   const iframeRef = useRef<any>(null);
-  const [error, setError] = useState<string>('');
+  const cell = useTypeSelector((state) => state.cell.data[id]);
+  const { startBundling, stopBundling } = useAction();
 
   const resetIframeContent = useCallback(() => {
     iframeRef.current.srcdoc = iframeSrcDoc;
@@ -44,13 +51,15 @@ const CompileCodeScreen: React.FC<CompileCodeScreenProps> = ({ userCode }) => {
   const handleCodeChange = useCallback(
     async (userCode: string) => {
       resetIframeContent();
+      startBundling(id);
 
       const result = await bundleCode(userCode);
 
+      stopBundling(id, result.err);
+
       iframeRef.current.contentWindow.postMessage(result.code, '*');
-      setError(result.err);
     },
-    [resetIframeContent]
+    [id, resetIframeContent, startBundling, stopBundling]
   );
 
   useEffect(() => {
@@ -61,6 +70,15 @@ const CompileCodeScreen: React.FC<CompileCodeScreenProps> = ({ userCode }) => {
 
   return (
     <div className="compile-code-iframe-container">
+      {cell.isLoading && (
+        <div className="progress-cover">
+          <progress
+            className="progress is-small is-primary"
+            max={100}
+          ></progress>
+        </div>
+      )}
+
       <iframe
         className="compile-code-iframe"
         ref={iframeRef}
@@ -68,7 +86,7 @@ const CompileCodeScreen: React.FC<CompileCodeScreenProps> = ({ userCode }) => {
         srcDoc={iframeSrcDoc}
         title="code preview"
       />
-      {error && <span className="compile-code-error">{error}</span>}
+      {cell.error && <span className="compile-code-error">{cell.error}</span>}
     </div>
   );
 };

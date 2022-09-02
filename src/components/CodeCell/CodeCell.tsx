@@ -44,7 +44,7 @@ const CodeCell: React.FC<CodeCellProps> = ({ id, content, updateCell }) => {
               onChange={(e) => updateCell(id, e)}
             />
           </ResizableContainer>
-          <CompileCodeScreen userCode={content} />
+          <CompileCodeScreen id={id} userCode={content} />
         </div>
       </ResizableContainer>
     </div>
