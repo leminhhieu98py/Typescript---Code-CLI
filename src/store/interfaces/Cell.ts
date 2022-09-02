@@ -3,4 +3,6 @@ export type CellType = 'code' | 'markdown'; // Cell can be a Code Cell or a Mark
 export interface Cell {
   type: CellType;
   content: string;
+  isLoading: boolean;
+  error: string | null;
 }
