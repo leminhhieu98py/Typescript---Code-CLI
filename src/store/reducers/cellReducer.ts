@@ -4,6 +4,10 @@ import { CellAction } from '../actions';
 import { CellActionType } from '../actionTypes';
 import { Cell } from '../interfaces';
 
+const createRandomId = () => {
+  return new Date().getTime().toString();
+};
+
 interface CellState {
   order: string[];
   data: {
@@ -11,18 +15,36 @@ interface CellState {
   };
 }
 
+const randomId = createRandomId();
+
+const initialEditorValue = `
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+
+const App = () => {
+  const [count, setCount] = useState(0);
+
+  const handleIncrease = () => setCount(count + 1);
+  const handleDecrease = () => setCount(count - 1);
+  return (
+    <>
+      <span>Count: {count}</span>
+      <button onClick={handleIncrease}>Increase</button>
+      <button onClick={handleDecrease}>Decrease</button>
+    </>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+`;
+
 const initialState: CellState = {
-  order: ['123', '1233'],
+  order: [randomId],
   data: {
-    '123': {
+    [randomId]: {
       type: 'code',
-      content: `console.log('Hello World');`,
-      isLoading: false,
-      error: null
-    },
-    '1233': {
-      type: 'markdown',
-      content: '# Hello world',
+      content: initialEditorValue,
       isLoading: false,
       error: null
     }
@@ -91,7 +113,3 @@ const reducer = produce(
 );
 
 export default reducer;
-
-const createRandomId = () => {
-  return new Date().getTime().toString();
-};
