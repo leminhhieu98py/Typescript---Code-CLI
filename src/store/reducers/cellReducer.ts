@@ -5,8 +5,6 @@ import { ActionType } from '../actionTypes';
 import { Cell } from '../interfaces/Cell';
 
 interface CellState {
-  isLoading: boolean;
-  error: string | null;
   order: string[];
   data: {
     [key: string]: Cell;
@@ -14,17 +12,19 @@ interface CellState {
 }
 
 const initialState: CellState = {
-  isLoading: false,
-  error: null,
   order: ['123', '1233'],
   data: {
     '123': {
       type: 'code',
-      content: `console.log('Hello World');`
+      content: `console.log('Hello World');`,
+      isLoading: false,
+      error: null
     },
     '1233': {
       type: 'markdown',
-      content: '# Hello world'
+      content: '# Hello world',
+      isLoading: false,
+      error: null
     }
   }
 };
@@ -65,8 +65,21 @@ const reducer = produce(
           state.order.splice(index + 1, 0, newCellId);
           state.data[newCellId] = {
             type: action.payload.type,
-            content: ''
+            content: '',
+            isLoading: false,
+            error: null
           };
+        }
+        return state;
+
+      case ActionType.START_BUNDLING:
+        state.data[action.payload.cellId].isLoading = true;
+        return state;
+
+      case ActionType.STOP_BUNDLING:
+        state.data[action.payload.cellId].isLoading = false;
+        if (action.payload.error) {
+          state.data[action.payload.cellId].error = action.payload.error;
         }
         return state;
 
