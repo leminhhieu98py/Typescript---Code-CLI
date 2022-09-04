@@ -36,6 +36,29 @@ const iframeSrcDoc = `
     </body>
 `;
 
+const showFunctionScript = `
+import _React from 'react';
+import _ReactDOM from 'react-dom';
+
+function show(value){
+  var rootNode = document.getElementById('root');
+  var insertLineBreak = () => rootNode.insertAdjacentHTML('afterend', '<br />')
+
+  if(value.$$typeof){
+    const root = _ReactDOM.createRoot(rootNode);
+    root.render(value);
+  } 
+  else if(typeof value === 'object'){
+    rootNode.insertAdjacentHTML('afterend', JSON.stringify(value));
+    insertLineBreak();
+  }
+  else {
+    rootNode.insertAdjacentHTML('afterend', value);
+    insertLineBreak();
+  }
+}
+`;
+
 const CompileCodeScreen: React.FC<CompileCodeScreenProps> = ({
   userCode,
   id
@@ -53,7 +76,9 @@ const CompileCodeScreen: React.FC<CompileCodeScreenProps> = ({
       resetIframeContent();
       startBundling(id);
 
-      const result = await bundleCode(userCode);
+      const userCodeWithShowFunction = `${userCode} \n ${showFunctionScript}`;
+
+      const result = await bundleCode(userCodeWithShowFunction);
 
       stopBundling(id, result.err);
 
