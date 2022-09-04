@@ -9,6 +9,9 @@ import _ReactDOM from 'react-dom';
 
 function show(value){
   var rootNode = document.getElementById('root');
+  
+  if(!rootNode) return;
+
   var insertLineBreak = () => rootNode.insertAdjacentHTML('afterend', '<br />')
 
   if(value.$$typeof){
@@ -50,6 +53,7 @@ export const useBundleCode = (
       const result = await bundleCode(userCodeWithShowFunction);
 
       stopBundling(id, result.err);
+
       if (iframeRef.current?.contentWindow) {
         iframeRef.current.contentWindow?.postMessage(result.code, '*');
       }
