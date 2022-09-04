@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './codeCell.css';
 import MoncacoEditor from '../common/MonacoEditor/MonacoEditor';
 import ResizableContainer from '../common/ResizableContainer/ResizableContainer';
