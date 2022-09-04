@@ -95,9 +95,7 @@ const reducer = produce(
 
       case CellActionType.STOP_BUNDLING:
         state.data[action.payload.cellId].isLoading = false;
-        if (action.payload.error) {
-          state.data[action.payload.cellId].error = action.payload.error;
-        }
+        state.data[action.payload.cellId].error = action.payload.error;
         return state;
 
       default:
