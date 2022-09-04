@@ -17,10 +17,7 @@ interface CellState {
 
 const randomId = createRandomId();
 
-const initialEditorValue = `
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
-
+const initialEditorValue = `import { useState } from 'react';
 const App = () => {
   const [count, setCount] = useState(0);
 
@@ -35,9 +32,7 @@ const App = () => {
   );
 };
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
-`;
+show(<App />)`;
 
 const initialState: CellState = {
   order: [randomId],
