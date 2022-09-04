@@ -1,8 +1,7 @@
-import React, { useEffect, useCallback, useRef, useState } from 'react';
-import { bundleCode } from '../../utils/bundler';
+import React, { useRef } from 'react';
 import './compileCodeScreen.css';
-import useAction from './../../hooks/useAction';
 import useTypeSelector from '../../hooks/useTypeSelector';
+import { useBundleCode } from './hooks/useBundleCode';
 
 interface CompileCodeScreenProps {
   userCode: string;
@@ -36,62 +35,13 @@ const iframeSrcDoc = `
     </body>
 `;
 
-const showFunctionScript = `
-import _React from 'react';
-import _ReactDOM from 'react-dom';
-
-function show(value){
-  var rootNode = document.getElementById('root');
-  var insertLineBreak = () => rootNode.insertAdjacentHTML('afterend', '<br />')
-
-  if(value.$$typeof){
-    const root = _ReactDOM.createRoot(rootNode);
-    root.render(value);
-  } 
-  else if(typeof value === 'object'){
-    rootNode.insertAdjacentHTML('afterend', JSON.stringify(value));
-    insertLineBreak();
-  }
-  else {
-    rootNode.insertAdjacentHTML('afterend', value);
-    insertLineBreak();
-  }
-}
-`;
-
 const CompileCodeScreen: React.FC<CompileCodeScreenProps> = ({
   userCode,
   id
 }) => {
   const iframeRef = useRef<any>(null);
   const cell = useTypeSelector((state) => state.cell.data[id]);
-  const { startBundling, stopBundling } = useAction();
-
-  const resetIframeContent = useCallback(() => {
-    iframeRef.current.srcdoc = iframeSrcDoc;
-  }, []);
-
-  const handleCodeChange = useCallback(
-    async (userCode: string) => {
-      resetIframeContent();
-      startBundling(id);
-
-      const userCodeWithShowFunction = `${userCode} \n ${showFunctionScript}`;
-
-      const result = await bundleCode(userCodeWithShowFunction);
-
-      stopBundling(id, result.err);
-
-      iframeRef.current.contentWindow.postMessage(result.code, '*');
-    },
-    [id, resetIframeContent, startBundling, stopBundling]
-  );
-
-  useEffect(() => {
-    const bundleCode = setTimeout(() => handleCodeChange(userCode), 1000);
-
-    return () => clearTimeout(bundleCode);
-  }, [userCode, handleCodeChange]);
+  useBundleCode(iframeRef, iframeSrcDoc, id, userCode);
 
   return (
     <div className="compile-code-iframe-container">
