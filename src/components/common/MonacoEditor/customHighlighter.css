@@ -1,141 +1,59 @@
 .editor-container .mtk1 {
-  color: #67f3dc;
+  color: #8be9fd;
 }
-.editor-container .mtk2 {
-  color: #1e1e1e;
-}
-.editor-container .mtk3 {
-  color: #000080;
-}
-.editor-container .mtk4 {
-  color: #6a9955;
-}
+
 .editor-container .mtk5 {
-  color: #DDF087;
+  color: #f1fa8c;
 }
+
 .editor-container .mtk6 {
-  color: #b5cea8;
+  color: #bd93f9;
 }
-.editor-container .mtk7 {
-  color: #646695;
-}
+
 .editor-container .mtk8 {
-  color: #E26FB7;
+  color: #ff79c6;
 }
+
 .editor-container .mtk9 {
-  color: pink;
+  color: #f8f8f2;
 }
-.editor-container .mtk10 {
-  color: #f44747;
-}
-.editor-container .mtk11 {
-  color: #ce9178;
-}
-.editor-container .mtk12 {
-  color: #6796e6;
-}
-.editor-container .mtk13 {
-  color: #808080;
-}
-.editor-container .mtk14 {
-  color: #d16969;
-}
-.editor-container .mtk15 {
-  color: #dcdcaa;
-}
-.editor-container .mtk16 {
-  color: #4ec9b0;
-}
-.editor-container .mtk17 {
-  color: #c586c0;
-}
-.editor-container .mtk18 {
-  color: #4fc1ff;
-}
-.editor-container .mtk19 {
-  color: #c8c8c8;
-}
-.editor-container .mtk20 {
-  color: #cd9731;
-}
-.editor-container .mtk21 {
-  color: #b267e6;
-}
+
 .editor-container .mtk22 {
-  color: #fff;
-}
-.editor-container .mtki {
-  font-style: italic;
-}
-.editor-container .mtkb {
-  font-weight: bold;
-}
-.editor-container .mtku {
-  text-decoration: underline;
-  text-underline-position: under;
+  color: #f8f8f2;
 }
 
 .editor-container .mtk100.Identifier.JsxElement.Bracket {
-  color: #fff;
-}
-
-.editor-container .mtk1000.Identifier.JsxOpeningElement.Bracket {
-  color: #808080;
-  font-weight: bold;
-}
-
-.editor-container .mtk1001.Identifier.JsxClosingElement.Bracket {
-  color: #808080;
-  font-weight: lighter;
-}
-
-.editor-container .mtk101.Identifier.JsxOpeningElement.Identifier {
-  color: #E26FB7;
-}
-
-.editor-container .mtk102.Identifier.JsxClosingElement.Identifier {
-  color: #E26FB7;
-  font-weight: lighter;
-}
-
-.editor-container .mtk103.Identifier.JsxAttribute.Identifier {
-  color: #42CA50;
+  color: #f8f8f2;
 }
 
 .editor-container .mtk104.JsxElement.JsxText {
-  color: #fff;
+  color: #f8f8f2;
 }
 
-.editor-container .mtk105.glyph.Identifier.JsxElement {
-  background: #61dafb;
-  opacity: 0.25;
+.editor-container .mtk1.mtk101.Identifier.JsxOpeningElement.Identifier {
+  color: #ff79c6;
 }
 
-.editor-container .mtk12.Identifier.JsxExpression.JsxClosingElement {
-  color: #ec5f67;
+.editor-container .mtk22.mtk101.Identifier.JsxOpeningElement.Identifier {
+  color: #8be9fd;
 }
 
-.editor-container .mtk12.Identifier.JsxSelfClosingElement {
-  color: #ec5f67;
+.editor-container .mtk102.Identifier.JsxClosingElement.Identifier {
+  color: #ff79c6;
 }
-.editor-container .mtk12.Identifier.VariableStatement.JsxClosingElement {
-  color: #ec5f67 !important;
+
+.editor-container .mtk1.mtk101.Identifier.JsxOpeningElement.Identifier.mtk103.Identifier.JsxAttribute.Identifier {
+  color: #50fa7b;
 }
-.editor-container .mtk12.VariableStatement.JsxSelfClosingElement.Identifier {
-  color: #ec5f67;
-}
-.editor-container .mtk12.Identifier.JsxAttribute.VariableDeclaration {
-  color: crimson;
-}
-.editor-container .mtk12.JsxExpression.VariableStatement {
-  color: #fac863;
-}
-.editor-container .mtk12.VariableStatement.JsxSelfClosingElement {
-  color: #ede0e0;
-}
+
 .editor-container .mtk12.VariableStatement.JsxClosingElement {
   color: #ede0e0;
 }
+
 .editor-container .JsxText {
   color: #0c141f;
+}
+
+.editor-container .monaco-editor {
+  background-color: #282a36;
 }
