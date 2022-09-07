@@ -67,13 +67,10 @@ const MoncacoEditor: React.FC<MoncacoEditorProps> = ({ value, onChange }) => {
         language="javascript"
         options={{
           wordWrap: 'on',
-          minimap: { enabled: false },
-          showUnused: false,
-          folding: false,
-          lineNumbersMinChars: 3,
-          fontSize: 16,
-          scrollBeyondLastLine: false,
-          automaticLayout: true
+          fontSize: 14,
+          automaticLayout: true,
+          colorDecorators: true,
+          formatOnPaste: true,
         }}
       />
     </div>
