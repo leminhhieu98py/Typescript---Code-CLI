@@ -6,6 +6,7 @@ import codeShift from 'jscodeshift';
 import Highlighter from 'monaco-jsx-highlighter';
 import './monacoEditor.css';
 import './customHighlighter.css';
+import { Button } from 'antd';
 interface MoncacoEditorProps {
   value: string;
   onChange: (value: string) => void;
@@ -53,12 +54,13 @@ const MoncacoEditor: React.FC<MoncacoEditorProps> = ({ value, onChange }) => {
 
   return (
     <div className="editor-container">
-      <button
-        className="button-floating button button-format is-primary is-small"
+      <Button
+        type="primary"
+        className="button-floating"
         onClick={handleFormatCode}
       >
         Format
-      </button>
+      </Button>
       <Editor
         editorDidMount={onEditorDidMount}
         value={value}
@@ -70,7 +72,7 @@ const MoncacoEditor: React.FC<MoncacoEditorProps> = ({ value, onChange }) => {
           fontSize: 14,
           automaticLayout: true,
           colorDecorators: true,
-          formatOnPaste: true,
+          formatOnPaste: true
         }}
       />
     </div>
