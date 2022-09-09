@@ -1,4 +1,3 @@
-// import 'bulmaswatch/superhero/bulmaswatch.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './App.scss';
 import React from 'react';
