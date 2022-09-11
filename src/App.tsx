@@ -3,7 +3,6 @@ import { useRoutes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import './App.scss';
-import '@fortawesome/fontawesome-free/css/all.min.css';
 
 import store from './store/store';
 import routes from './routes';
