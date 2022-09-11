@@ -1,17 +1,17 @@
+import React from 'react';
+import { useRoutes } from 'react-router-dom';
+import { Provider } from 'react-redux';
+
 import './App.scss';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import React from 'react';
-import { Provider } from 'react-redux';
-import CellList from './components/CellList/CellList';
 
 import store from './store/store';
+import routes from './routes';
 
 const App = () => {
-  return (
-    <Provider store={store}>
-      <CellList />
-    </Provider>
-  );
+  const element = useRoutes(routes);
+
+  return <Provider store={store}>{element}</Provider>;
 };
 
 export default React.memo(App, () => true);
