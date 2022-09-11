@@ -1,4 +1,5 @@
-import { Footer } from 'antd/lib/layout/layout';
+import { Layout } from 'antd';
+const { Footer } = Layout;
 
 const HomepageFooter = () => {
   return <Footer>Footer</Footer>;
