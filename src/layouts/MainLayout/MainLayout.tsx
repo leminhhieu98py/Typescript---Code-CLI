@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 const { Header, Sider, Content } = Layout;
 
-const FunctionPageLayout = () => {
+const MainLayout = () => {
   return (
     <Layout>
       <Header>Header</Header>
@@ -17,4 +17,4 @@ const FunctionPageLayout = () => {
   );
 };
 
-export default FunctionPageLayout;
+export default MainLayout;

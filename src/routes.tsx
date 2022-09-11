@@ -1,7 +1,11 @@
-import FunctionPageLayout from './layouts/FunctionPageLayout/FunctionPageLayout';
 import HomepageLayout from './layouts/HomepageLayout/HomepageLayout';
-import CellList from './components/CellList/CellList';
+import MainLayout from './layouts/MainLayout/MainLayout';
+
+// pages using HomepageLayout
 import Home from './pages/home/Home';
+
+// pages using MainLayout
+import CellList from './components/CellList/CellList';
 
 const routes = [
   {
@@ -15,7 +19,7 @@ const routes = [
     ]
   },
   {
-    element: <FunctionPageLayout />,
+    element: <MainLayout />,
     children: [
       {
         element: <CellList />,
