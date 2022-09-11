@@ -1,19 +1,17 @@
-import React, { FC } from 'react';
 import { Layout } from 'antd';
+import { Outlet } from 'react-router-dom';
 
 const { Header, Sider, Content } = Layout;
 
-interface FunctionPageLayoutProps {
-  children: React.ReactNode;
-}
-
-const FunctionPageLayout: FC<FunctionPageLayoutProps> = ({ children }) => {
+const FunctionPageLayout = () => {
   return (
     <Layout>
       <Header>Header</Header>
       <Layout>
         <Sider>Sider</Sider>
-        <Content>{children}</Content>
+        <Content>
+          <Outlet />
+        </Content>
       </Layout>
     </Layout>
   );
