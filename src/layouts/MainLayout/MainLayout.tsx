@@ -1,14 +1,16 @@
 import { Layout } from 'antd';
 import { Outlet } from 'react-router-dom';
+import MainLayoutSider from './MainLayoutSider';
+import MainLayoutHeader from './MainLayoutHeader';
 
-const { Header, Sider, Content } = Layout;
+const { Content } = Layout;
 
 const MainLayout = () => {
   return (
     <Layout>
-      <Header>Header</Header>
+      <MainLayoutHeader />
       <Layout>
-        <Sider>Sider</Sider>
+        <MainLayoutSider />
         <Content>
           <Outlet />
         </Content>
