@@ -1,4 +1,5 @@
-import Sider from 'antd/lib/layout/Sider';
+import { Layout } from 'antd';
+const { Sider } = Layout;
 
 const MainLayoutSider = () => {
   return <Sider>Sider</Sider>;

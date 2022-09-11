@@ -3,14 +3,14 @@ import { Outlet } from 'react-router-dom';
 import MainLayoutSider from './MainLayoutSider';
 import MainLayoutHeader from './MainLayoutHeader';
 
-const { Content } = Layout;
+const { Content, Sider, Header } = Layout;
 
 const MainLayout = () => {
   return (
     <Layout>
-      <MainLayoutHeader />
+      <MainLayoutSider />
       <Layout>
-        <MainLayoutSider />
+        <MainLayoutHeader />
         <Content>
           <Outlet />
         </Content>
