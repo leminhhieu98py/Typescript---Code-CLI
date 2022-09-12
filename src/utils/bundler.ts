@@ -1,5 +1,5 @@
 import * as esbuild from 'esbuild-wasm';
-import { ESBUILD_WASM_URL } from '../common/const';
+import { ESBUILD_WASM_URL } from '../utils/const';
 import { unpkgPathPlugin } from '../plugins/unpkg-path-plugin';
 import { fetchPlugin } from '../plugins/fetch-plugin';
 
