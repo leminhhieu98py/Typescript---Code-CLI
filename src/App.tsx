@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import './App.scss';
 
 import store from './store/store';
-import routes from './routes';
+import routes from './router/routes';
 
 const App = () => {
   const element = useRoutes(routes);
