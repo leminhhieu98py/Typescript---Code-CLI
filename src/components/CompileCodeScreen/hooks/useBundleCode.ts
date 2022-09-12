@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 
-import useAction from './../../../hooks/useAction';
+// import useAction from './../../../hooks/useAction';
 import { bundleCode } from './../../../utils/bundler';
 
 const showFunctionScript = `
@@ -35,7 +35,7 @@ export const useBundleCode = (
   id: string,
   userCode: string
 ) => {
-  const { startBundling, stopBundling } = useAction();
+  // const { startBundling, stopBundling } = useAction();
 
   const resetIframeContent = useCallback(() => {
     if (iframeRef.current?.srcdoc) {
@@ -46,19 +46,19 @@ export const useBundleCode = (
   const handleCodeChange = useCallback(
     async (userCode: string) => {
       resetIframeContent();
-      startBundling(id);
+      // startBundling(id);
 
       const userCodeWithShowFunction = `${userCode} \n ${showFunctionScript}`;
 
       const result = await bundleCode(userCodeWithShowFunction);
 
-      stopBundling(id, result.err);
+      // stopBundling(id, result.err);
 
       if (iframeRef.current?.contentWindow) {
         iframeRef.current.contentWindow?.postMessage(result.code, '*');
       }
     },
-    [id, iframeRef, resetIframeContent, startBundling, stopBundling]
+    [iframeRef, resetIframeContent]
   );
 
   useEffect(() => {

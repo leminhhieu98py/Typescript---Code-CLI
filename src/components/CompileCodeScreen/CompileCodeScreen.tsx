@@ -45,7 +45,7 @@ const CompileCodeScreen: React.FC<CompileCodeScreenProps> = ({
 
   return (
     <div className="compile-code-iframe-container">
-      {cell.isLoading && (
+      {!!cell && cell.isLoading && (
         <div className="progress-cover">
           <progress
             className="progress is-small is-primary"
@@ -61,7 +61,9 @@ const CompileCodeScreen: React.FC<CompileCodeScreenProps> = ({
         srcDoc={iframeSrcDoc}
         title="code preview"
       />
-      {cell.error && <span className="compile-code-error">{cell.error}</span>}
+      {!!cell && cell.error && (
+        <span className="compile-code-error">{cell.error}</span>
+      )}
     </div>
   );
 };
