@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import Login from '../pages/login/Login';
+import LoginPage from '../pages/LoginPage/LoginPage';
 
 const useAuth = () => {
   const token = '123';
@@ -8,7 +8,7 @@ const useAuth = () => {
 
 const ProtectedRoute = () => {
   const isAuth = useAuth();
-  return isAuth ? <Outlet /> : <Login />;
+  return isAuth ? <Outlet /> : <LoginPage />;
 };
 
 export default ProtectedRoute;
