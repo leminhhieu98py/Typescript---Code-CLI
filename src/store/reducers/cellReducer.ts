@@ -2,7 +2,7 @@ import produce from 'immer';
 
 import { CellAction } from '../actions';
 import { CellActionType } from '../actionTypes';
-import { Cell } from '../interfaces';
+import { Cell } from '../../typings';
 
 const createRandomId = () => {
   return new Date().getTime().toString();

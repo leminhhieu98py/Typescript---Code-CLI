@@ -6,7 +6,7 @@ import {
   Direction
 } from '../actions';
 import { CellActionType } from '../actionTypes';
-import { CellType } from '../interfaces';
+import { CellType } from '../../typings';
 
 export const moveCell = (id: string, direction: Direction): MoveCellAction => {
   return {
