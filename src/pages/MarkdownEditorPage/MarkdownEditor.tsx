@@ -1,19 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import MDEditor from '@uiw/react-md-editor';
-import './markdownEditor.css';
+import './MarkdownEditor.css';
 
-interface MarkdownEditorProps {
-  id: string;
-  content: string;
-  updateCell: (id: string, content: string) => {};
-}
-
-const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
-  id,
-  content,
-  updateCell
-}) => {
+const MarkdownEditor = () => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [content, setContent] = useState<string>('');
   const mdEditorRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -43,7 +34,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
         {isEditing ? (
           <MDEditor
             value={content ? content : `### Start to write a document here`}
-            onChange={(e) => updateCell(id, e as string)}
+            onChange={(e) => setContent(e as string)}
           />
         ) : (
           <MDEditor.Markdown
