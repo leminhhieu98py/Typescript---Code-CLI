@@ -1,0 +1,9 @@
+.layout__wrapper {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.layout__content__wrapper div:first-child {
+  height: 100%;
+  overflow: hidden;
+}
