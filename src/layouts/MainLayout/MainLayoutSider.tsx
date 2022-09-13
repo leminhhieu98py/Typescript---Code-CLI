@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Layout, Menu, MenuProps } from 'antd';
+import { Layout, Menu } from 'antd';
 const { Sider } = Layout;
 import { PieChartOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
