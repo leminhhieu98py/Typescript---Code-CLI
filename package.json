@@ -44,7 +44,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .tsx,.ts",
-    "lint:fix": "eslint --fix --ext .tsx,.ts ."
+    "lint:fix": "eslint --fix --ext .tsx,.ts .",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -70,6 +71,7 @@
     "@typescript-eslint/parser": "^5.37.0",
     "eslint": "^8.23.1",
     "eslint-plugin-react": "^7.31.8",
+    "husky": "^8.0.1",
     "react-error-overlay": "6.0.9",
     "sass": "^1.54.5"
   }
