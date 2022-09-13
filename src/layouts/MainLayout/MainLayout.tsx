@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import MainLayoutSider from './MainLayoutSider';
 import MainLayoutHeader from './MainLayoutHeader';
 
-const { Content, Sider, Header } = Layout;
+const { Content } = Layout;
 
 const MainLayout = () => {
   return (
